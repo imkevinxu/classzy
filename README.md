@@ -1,7 +1,7 @@
 Classzy
 =======
 
-Nyan nyan nyan
+Nyan nyan nyan (>")>
 
 Pre-requisites
 --------------
@@ -10,31 +10,36 @@ Pre-requisites
 - Install Python
 - Install Django
 
-Initial Steps
--------------
+To Import Everything
+--------------------
 	git clone git@github.com:imkevinxu/Classzy.git
+	
+To Run Locally
+--------------
 	cd Classzy
 	python manage.py syncdb
+	python manage.py runserver
 	
-- Change TEMPLATE_DIRS path to your absolute path
+- **Change TEMPLATE_DIRS path to your absolute path**
+- Go to http://localhost:8000/
+	
+To Push
+-------
+	git remote add deploy ec2-user@classzy.projectnyan.com:/classzy.git (only do once)
+	git push origin master && git push deploy master
 
-To Run
-------
-	python runserver
-	Go to http://localhost:8000/
+To Access Server
+----------------
+Get classzy.pem
 
-Steps to SSH to server
-----------------------
-
-- Obtain classzy.pem
-
-Two ways to SSH
-
-- Store classzy.pem into location
-
-	ssh-add classzy.pem
+	ssh-add classzy.pem (must do everytime)
 	ssh ec2-user@classzy.projectnyan.com
 	
-- Or...
+Or...
 
 	ssh -i classzy.pem ec2-user@classzy.projectnyan.com
+
+While Inside Server
+-------------------
+- work - enters project folder
+- restart - restarts the server

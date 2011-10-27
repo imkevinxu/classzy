@@ -3,6 +3,13 @@ Classzy
 
 Nyan nyan nyan
 
+Pre-requisites
+--------------
+
+- Install Github
+- Install Python
+- Install Django
+
 Initial Steps
 -------------
 	git clone git@github.com:imkevinxu/Classzy.git
@@ -24,8 +31,10 @@ Steps to SSH to server
 Two ways to SSH
 
 - Store classzy.pem into location
+
 	ssh-add classzy.pem
 	ssh ec2-user@classzy.projectnyan.com
 	
 - Or...
+
 	ssh -i classzy.pem ec2-user@classzy.projectnyan.com

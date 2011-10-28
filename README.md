@@ -20,10 +20,10 @@ Initial Setup
 --------------
 	cd Classzy
 	python manage.py syncdb
+	git update-index --assume-unchanged settings.py
 	
 - **Change TEMPLATE_DIRS path to your absolute path** in settings.py
 
-	git update-index --assume-unchanged
 
 To Run Locally
 --------------
@@ -33,7 +33,8 @@ To Run Locally
 	
 To Push
 -------
-	git remote add deploy ec2-user@classzy.projectnyan.com:/classzy/.git (only do once)
+	git remote add deploy ssh://ec2-user@classzy.projectnyan.com/classzy/.git (only do once)
+	ssh-add classzy.pem (once every time terminal is open)
 	git push origin master && git push deploy master
 
 To Access Server
@@ -47,3 +48,12 @@ While Inside Server
 -------------------
 - work - enters project folder
 - restart - restarts the server
+
+Typical work cycle
+------------------
+
+- Edit files locally
+- git add/commit
+- git push origin master
+- git push deploy master
+- ssh into server and restart

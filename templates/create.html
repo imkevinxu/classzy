@@ -16,18 +16,24 @@
 	<div id="login">
 
 		<h1 id="special">Welcome to Classzy</h1>
+		
+		<h3>Create your account</h3>
 
-		<form action="/" method="post">{% csrf_token %}
+		<form action="/create" method="post">{% csrf_token %}
 			<div class="clearfix">
 				<label for="username" style="font-size:1.3em;">Username</label><br/>
-				<input type="text" name="username" value="" id="username" autofocus>
+				<input type="text" name="username" value="nyancat" id="username" autofocus>
 			</div>
 			<div class="clearfix">
 				<label for="password" style="font-size:1.3em;">Password</label><br/>
-				<input type="password" name="password" value="" id="password">
+				<input type="password" name="password" value="batman" id="password">
+			</div>
+			<div class="clearfix">
+				<label for="classes" style="font-size:1.3em;">List your classes</label><br/>
+				<input type="text" name="classes" value="CS107, E40" id="classes">
 			</div><br/>
 			<div class="clearfix">
-				<button class="btn large primary" style="width:200px;">Login</button>
+				<button class="btn large primary" style="width:200px;">Join Classzy</button>
 				<input type="hidden" name="next" value="" />
 			</div>	
 		</form>

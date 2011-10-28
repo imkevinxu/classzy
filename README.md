@@ -25,7 +25,7 @@ To Run Locally
 	
 To Push
 -------
-	git remote add deploy ec2-user@classzy.projectnyan.com:/classzy.git (only do once)
+	git remote add deploy ec2-user@classzy.projectnyan.com:~/classzy/classzy.git (only do once)
 	git push origin master && git push deploy master
 
 To Access Server

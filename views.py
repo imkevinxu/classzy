@@ -18,3 +18,6 @@ def profile(request):
 	
 def view_class(request):
 	return render_to_response('class.html', context_instance=RequestContext(request))
+	
+def add(request):
+	return render_to_response('add.html', context_instance=RequestContext(request))

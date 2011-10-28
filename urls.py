@@ -14,5 +14,6 @@ urlpatterns = patterns('',
 	url(r'^create', 'views.create'),
 	url(r'^profile', 'views.profile'),
 	url(r'^class', 'views.view_class'),
+	url(r'^add', 'views.add'),
 
 )

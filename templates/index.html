@@ -3,14 +3,41 @@
 <head>
     <meta charset="UTF-8" />
     <title>Classzy</title>
+	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
+	<style type="text/css">
+	
+		#login {margin: 0 auto; text-align:center;;}
+	
+	</style>
 </head>
 <body>
 
-	Hello World<br/>
-	
-	Welcome to Classzy!!!<br/>
-	
-	<img src="http://i.imgur.com/7lhmQ.gif" alt="" />
+	<div id="login">
+
+		<h1 id="special">Welcome to Classzy</h1>
+
+		<form action="" method="post">
+			<div class="clearfix">
+				<label for="username" style="font-size:1.3em;">Username</label>
+				<div class="input">
+					<input type="text" name="username" value="" id="username" autofocus>
+				</div>
+			</div>
+			<div class="clearfix">
+				<label for="password" style="font-size:1.3em;">Password</label>
+				<div class="input">
+					<input type="password" name="password" value="" id="password">
+				</div>
+			</div><br/>
+			<div class="clearfix">
+				<button class="btn large primary" style="width:200px;">Login</button>
+				<input type="hidden" name="next" value="" />
+			</div>	
+		</form>
+		
+		<a href="/create">Create an Account</a>
+
+	</div>
 
 </body>
 </html>

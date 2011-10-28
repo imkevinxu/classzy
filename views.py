@@ -15,3 +15,6 @@ def create(request):
 	
 def profile(request):
 	return render_to_response('profile.html', context_instance=RequestContext(request))
+	
+def view_class(request):
+	return render_to_response('class.html', context_instance=RequestContext(request))

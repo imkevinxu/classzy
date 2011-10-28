@@ -23,6 +23,8 @@ Initial Setup
 	
 - **Change TEMPLATE_DIRS path to your absolute path** in settings.py
 
+	git update-index --assume-unchanged
+
 To Run Locally
 --------------
 	python manage.py runserver
@@ -31,7 +33,7 @@ To Run Locally
 	
 To Push
 -------
-	git remote add deploy ec2-user@classzy.projectnyan.com:~/classzy/classzy.git (only do once)
+	git remote add deploy ec2-user@classzy.projectnyan.com:/classzy/.git (only do once)
 	git push origin master && git push deploy master
 
 To Access Server

@@ -20,7 +20,7 @@
 				</div>
 			
 				<div class="span1 offset3">
-					<strong>Logout</strong>
+					<a href="/"><strong>Logout</strong></a>
 				</div>
 			</div>
 			
@@ -29,11 +29,15 @@
 			<form action="/" method="post">{% csrf_token %}
 				<div class="clearfix">
 					<label for="assignment" style="font-size:1.3em;">Assignment</label><br/>
-					<input type="text" name="assignment" value="" id="assignment" autofocus>
+					<input type="text" name="assignment" value="#1" id="assignment" autofocus>
+				</div>
+				<div class="clearfix">
+					<label for="comment" style="font-size:1.3em;">Comment</label><br/>
+					<input type="text" name="comment" value="Still goin..." id="comment" autofocus>
 				</div>
 				<div class="clearfix">
 					<label for="time" style="font-size:1.3em;">Time</label><br/>
-					<input type="password" name="time" value="" id="time">
+					<input type="text" name="time" value="53" id="time">
 				</div><br/>
 				<div class="clearfix">
 					<a href="/class" class="btn large primary" style="width:200px;">Submit</a>

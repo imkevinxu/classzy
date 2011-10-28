@@ -12,5 +12,6 @@ urlpatterns = patterns('',
 	
     url(r'^$', 'views.home'),
 	url(r'^create', 'views.create'),
+	url(r'^profile', 'views.profile'),
 
 )

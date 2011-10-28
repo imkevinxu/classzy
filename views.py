@@ -12,3 +12,6 @@ def create(request):
 	if request.POST:
 		return render_to_response('profile.html', context_instance=RequestContext(request))
 	return render_to_response('create.html', context_instance=RequestContext(request))
+	
+def profile(request):
+	return render_to_response('profile.html', context_instance=RequestContext(request))

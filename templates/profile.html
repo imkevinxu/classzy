@@ -13,26 +13,15 @@
 </head>
 <body>
 
-	<div id="login">
-
-		<h1 id="special">Welcome to Classzy!!!</h1>
-
-		<form action="/" method="post">{% csrf_token %}
-			<div class="clearfix">
-				<label for="username" style="font-size:1.3em;">Username</label><br/>
-				<input type="text" name="username" value="" id="username" autofocus>
-			</div>
-			<div class="clearfix">
-				<label for="password" style="font-size:1.3em;">Password</label><br/>
-				<input type="password" name="password" value="" id="password">
-			</div><br/>
-			<div class="clearfix">
-				<button class="btn large primary" style="width:200px;">Login</button>
-				<input type="hidden" name="next" value="" />
-			</div>	
-		</form>
+	<div class="row">
 		
-		<a href="/create">Create an Account</a>
+		<div class="span1">
+			<h1>Classzy</h1>
+		</div>
+		
+		<div class="span6 offset9">
+			Hey
+		</div>
 
 	</div>
 

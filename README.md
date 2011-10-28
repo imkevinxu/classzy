@@ -1,8 +1,8 @@
 Classzy
 =======
 
-Nyan nyan nyan (>")>
-http://classzy.projectnyan.com/
+Nyan nyan nyan (>")>  
+http://classzy.projectnyan.com/  
 http://bit.ly/classzy
 
 Pre-requisites

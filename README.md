@@ -2,6 +2,8 @@ Classzy
 =======
 
 Nyan nyan nyan (>")>
+http://classzy.projectnyan.com/
+http://bit.ly/classzy
 
 Pre-requisites
 --------------
@@ -14,13 +16,17 @@ To Import Everything
 --------------------
 	git clone git@github.com:imkevinxu/Classzy.git
 	
-To Run Locally
+Initial Setup
 --------------
 	cd Classzy
 	python manage.py syncdb
+	
+- **Change TEMPLATE_DIRS path to your absolute path** in settings.py
+
+To Run Locally
+--------------
 	python manage.py runserver
 	
-- **Change TEMPLATE_DIRS path to your absolute path**
 - Go to http://localhost:8000/
 	
 To Push
@@ -32,11 +38,7 @@ To Access Server
 ----------------
 Get classzy.pem
 
-	ssh-add classzy.pem (must do everytime)
-	ssh ec2-user@classzy.projectnyan.com
-	
-Or...
-
+	chmod 400 classzy.pem
 	ssh -i classzy.pem ec2-user@classzy.projectnyan.com
 
 While Inside Server

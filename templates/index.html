@@ -1,39 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>Classzy</title>
-	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
-	<meta name = "viewport" content = "initial-scale = 1.0">
-	<style type="text/css">
-	
-		#login {margin: 0 auto; text-align:center;}
-	
-	</style>
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>Classzy</title> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js"></script>
 </head>
 <body>
 
-	<div id="login">
+	<div data-role="page" id="login">
 
-		<h1 id="special">Welcome to Classzy</h1>
+		<div data-role="header">Welcome to Classzy</div>
 
-		<form action="/" method="post">{% csrf_token %}
-			<div class="clearfix">
-				<label for="username" style="font-size:1.3em;">Username</label><br/>
+		<div data-role="content">
+			<form action="/" method="post">{% csrf_token %}
+				<label for="username" style="font-size:1.3em;">Username</label>
 				<input type="text" name="username" value="" id="username" autofocus>
-			</div>
-			<div class="clearfix">
-				<label for="password" style="font-size:1.3em;">Password</label><br/>
+				<label for="password" style="font-size:1.3em;">Password</label>
 				<input type="password" name="password" value="" id="password">
-			</div><br/>
-			<div class="clearfix">
-				<a href="profile" class="btn large primary" style="width:200px;">Login</a>
-				<input type="hidden" name="next" value="" />
-			</div>	
-		</form>
+				<a data-role="button" href="profile">Login</a>
+			</form>
 		
-		<a href="/create">Create an Account</a>
-
+			<a data-role="button" href="/create">Create an Account</a>
+		
+		</div>
 	</div>
 
 </body>

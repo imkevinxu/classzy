@@ -20,9 +20,6 @@ Initial Setup
 --------------
 	cd Classzy
 	python manage.py syncdb
-	
-- Download jqm http://pypi.python.org/pypi/django-jqm
-
 
 To Run Locally
 --------------

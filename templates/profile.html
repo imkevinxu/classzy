@@ -1,51 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>Classzy</title>
-	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
-	<meta name = "viewport" content = "initial-scale = 1.0">
-</head>
-<body>
+{% extends "base.html" %}
 
-	<div class="row">
+{% block content %}
+
+	<div data-role="page" id="profile">
 		
-		<div class="span5">
-			<div class="row">
-				<div class="span1">
-					<a href="/profile"><strong>Classzy</strong></a>
-				</div>
-			
-				<div class="span1 offset3">
-					<a href="/"><strong>Logout</strong></a>
-				</div>
+		<div data-role="header">
+			<h1 class="ui-title">Welcome to Classzy</h1>
+		</div>
+		
+		<div data-role="content">
+			<h1>Classes</h1>
+			<div data-role="collapsible" data-collapsed="true">
+				<h1>CS 107</h1>
+				<h3>Assignment 1</h3>
+				<p>Avg Hours - 18</p>
+			</div>
+		
+			<div data-role="collapsible" data-collapsed="true">
+		    	<h1>CS 147</h1>
+				<h3>Assignment 1</h3>
+				<p>Avg Hours - 18</p>
+			</div>
+	
+			<div data-role="collapsible" data-collapsed="true">
+				<h1>CS 145</h1>
+				<h3>Assignment 1</h3>
+				<p>Avg Hours - 18</p>
+			</div>
+		
+			<div data-role="collapsible" data-collapsed="true">
+				<h1>CS 108</h1>
+				<h3>Assignment 1</h3>
+				<p>Avg Hours - 18</p>
 			</div>
 			
-			<h1>Classes</h1>
-			<table class="zebra-striped">
-			    <tr>
-			        <td><a href="/class">CS 107</a></td>
-			    </tr>
-			    <tr>
-			        <td><a href="/class">CS 147</a></td>
-			    </tr>
-			    <tr>
-			        <td><a href="/class">CS 145</a></td>
-			    </tr>
-			    <tr>
-			        <td><a href="/class">CS 108</a></td>
-			    </tr>
-			</table>
-			
 			<h1>Add Class</h1>
-			<input type="text" name="" value="" style="float:left;"/>
-			<a href="" class="large info btn">Add</a><br/><br/>
-			
-			<h1>Total HW Hours</h1>
-			<p><strong>12,031 hours</strong> logged</p>
+			<input type="text" name="" value="" />
 		</div>
 
 	</div>
 
-</body>
-</html>
+{% endblock %}

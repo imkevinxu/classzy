@@ -1,16 +1,12 @@
-<!DOCTYPE html> 
-<html> 
-	<head> 
-	<title>Classzy</title> 
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css" />
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js"></script>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
 
 	<div data-role="page" id="login">
 
-		<div data-role="header">Welcome to Classzy</div>
+		<div data-role="header">
+			<h1 class="ui-title">Welcome to Classzy</h1>
+		</div>
 
 		<div data-role="content">
 			<form action="/" method="post">{% csrf_token %}
@@ -18,13 +14,35 @@
 				<input type="text" name="username" value="" id="username" autofocus>
 				<label for="password" style="font-size:1.3em;">Password</label>
 				<input type="password" name="password" value="" id="password">
-				<a data-role="button" href="profile">Login</a>
+				<a data-role="button" href="profile" rel="external">Login</a>
 			</form>
 		
-			<a data-role="button" href="/create">Create an Account</a>
+			<a data-role="button" href="#create">Create an Account</a>
 		
 		</div>
 	</div>
+	
+	<div data-role="page" id="create">
 
-</body>
-</html>
+		<div data-role="header">
+			<a data-rel="back">Back</a>
+			<h1 class="ui-title">Create your account</h1>
+		</div>
+
+		<div data-role="content">
+			<form action="/create" method="post">{% csrf_token %}
+				<label for="username" style="font-size:1.3em;">Username</label>
+				<input type="text" name="username" value="nyancat" id="username" autofocus>
+				<label for="email" style="font-size:1.3em;">Email</label>
+				<input type="text" name="email" value="nyan@nyancat.com" id="email" autofocus>
+				<label for="password" style="font-size:1.3em;">Password</label>
+				<input type="password" name="password" value="batman" id="password">
+				<label for="classes" style="font-size:1.3em;">Classes</label>
+				<input type="text" name="classes" value="CS107, E40" id="classes">
+				<a data-role="button" href="profile" rel="external">Join Classzy</a>
+			</form>
+		
+		</div>
+	</div>
+	
+{% endblock %}

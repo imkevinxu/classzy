@@ -11,9 +11,6 @@ urlpatterns = patterns('',
 	url(r'^admin/', include(admin.site.urls)),
 	
     url(r'^$', 'views.home'),
-	url(r'^create', 'views.create'),
 	url(r'^profile', 'views.profile'),
-	url(r'^class', 'views.view_class'),
-	url(r'^add', 'views.add'),
 
 )

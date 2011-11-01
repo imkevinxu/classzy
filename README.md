@@ -20,9 +20,8 @@ Initial Setup
 --------------
 	cd Classzy
 	python manage.py syncdb
-	git update-index --assume-unchanged settings.py
 	
-- **Change TEMPLATE_DIRS path to your absolute path** in settings.py
+- Download jqm http://pypi.python.org/pypi/django-jqm
 
 
 To Run Locally

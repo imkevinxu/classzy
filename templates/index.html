@@ -2,73 +2,160 @@
 
 {% block content %}
 
-	{% if not classzy and not adding_warning %}
-	
-		<div data-role="page" id="search">
+	{% if not classzy %}
+		{% if not adding_warning %}
+			<div data-role="page" id="search">
 
+				<div data-role="content">
+		
+					<h1 id="title" class="fancy">Classzy</h1>
+		
+					{% if warning %}
+						<p class="warning">{{warning}}</p>
+					{% endif %}
+		
+					<form action="/" method="post" data-ajax="false" id="search_form">{% csrf_token %}
+						<div data-role="fieldcontain" style="margin-top:-20px">
+							<input type="search" name="class" value="" id="search_box"/>
+						</div>
+					</form>
+			
+					{% if not warning %}
+						<p>Examples: <a href="#" onclick="document.getElementById('search_box').value = 'CS 107'; document.getElementById('search_form').submit();">CS 107</a>, <a href="#" onclick="document.getElementById('search_box').value = 'CS 147'; document.getElementById('search_form').submit();">CS 147</a>, <a href="#" onclick="document.getElementById('search_box').value = 'CS 106A'; document.getElementById('search_form').submit();">CS 106A</a></p>
+					{% else %}
+						<p>Missing Class? <a href="#add_class">Add it</a></p>
+					{% endif %}
+				
+					<p class="fancy tagline">The info you <em>want</em> to know about your classes</p>
+	
+				</div>
+			</div>
+		{% endif %}
+		
+		<div data-role="page" id="add_class">
+		
+			<div data-role="header">
+				<a href="#search"  data-icon="delete" data-direction="reverse">Search</a>
+				<h1 class="ui-title">Add Class</h1>
+			</div>
+		
 			<div data-role="content">
 			
-				<h1 id="title" class="fancy">Classzy</h1>
-			
-				{% if warning %}
-					<p class="warning">{{warning}}</p>
+				{% if adding_warning %}
+					<p class="warning">{{adding_warning}}</p>
 				{% endif %}
 			
-				<form action="/" method="post">{% csrf_token %}
-					<div data-role="fieldcontain" style="margin-top:-20px">
-						<input type="search" name="class" value="" />
+				<form action="/" method="post" data-ajax="false" >{% csrf_token %}
+					<div data-role="fieldcontain">
+						<label for="class_code">Class Code</label>
+						<input type="text" name="class_code" value="" id="class_code"/>
+					
+						<button type="submit" data-theme="b" class="ui-btn-hidden" aria-disabled="false">Add Class</button>
 					</div>
 				</form>
-				
-				{% if not warning %}
-					<p>Examples: CS 106A, CS 107, CS 147</p>
-				{% else %}
-					<p>Missing Class? <a href="#add_class">Add it</a></p>
-				{% endif %}
-					
-				<p class="fancy tagline">The info you <em>want</em> to know about your classes</p>
-		
+
 			</div>
-		</div>
+		</div>	
 	{% endif %}
 	
-	{% if classzy %}
-		<div data-role="page" id="class">
-			
-			<div data-role="header">
-				<a href="#search" data-direction="reverse">Search</a>
-				<h1 class="ui-title">{{classzy.code}}</h1>
-			</div>
-					
-			<div data-role="content">
-		
-				<h1 id="class" class="fancy">{{classzy.code}}{% if classzy.name %} - {{classzy.name}}{% endif %}</h1>
-	
-			</div>
-		</div>
-	{% endif %}
-		
-	<div data-role="page" id="add_class">
+	<div data-role="page" id="class">
 		
 		<div data-role="header">
-			<a data-rel="back">Back</a>
-			<h1 class="ui-title">Add Class</h1>
+			<a href="#search" data-direction="reverse">Search</a>
+			<h1 class="ui-title">{{classzy.code}}</h1>
+			<a href="#edit" data-icon="gear" class="ui-btn-right">Edit</a>
 		</div>
-		
-		<div data-role="content">
+				
+		<div data-role="content" id="main">
+	
+			{% if updated %}
+				<p class="compact warning">Updated</p>
+			{% endif %}
+	
+			<h1 id="class" class="fancy">{{classzy.code}}{% if classzy.name %} - {{classzy.name}}{% endif %}</h1>
 			
-			{% if adding_warning %}
-				<p class="warning">{{adding_warning}}</p>
+			{% if assignments %}
+				{% for a in assignments %}
+				
+					<div data-role="collapsible" data-theme="d" data-collapsed="true">
+						<h1>{{a.name}} ({% if a.homework %}HW{% else %}Test{% endif %})</h1>
+						<h3>Due: {{a.due_date}}</h3>
+						<p>Avg Hours - 18</p>
+					</div>
+				
+				{% endfor %}
+			{% else %}
+				<div data-role="collapsible" data-theme="d" data-collapsed="true">
+					<h1>No Assignments Yet</h1>
+					<img src="static/img/funny.gif" alt="I have done nothing productive all day" width=280/>
+				</div>
 			{% endif %}
 			
-			<form action="/" method="post">{% csrf_token %}
+			<a href="#add_assignment" data-role="button" data-icon="star" data-theme="b" id="add_button">Add Assignment</a>
+
+		</div>
+		
+		
+		<div data-role="footer"> 
+			<h4>Total Views: {{classzy.views}}</h4> 
+		</div>
+	</div>
+	
+	
+	<div data-role="page" id="edit">
+
+		<div data-role="header">
+			<a data-rel="back">Back</a>
+			<h1 class="ui-title">{{classzy.code}}</h1>
+		</div>
+
+		<div data-role="content">
+
+			<h1>Edit {{classzy.code}}</h1>
+			<form action="/" method="post" data-ajax="false" >{% csrf_token %}
 				<div data-role="fieldcontain">
-					<label for="class_code">Class Code</label>
-					<input type="text" name="class_code" value="" id="class_code"/>
-					
-					<button type="submit" data-theme="b" class="ui-btn-hidden" aria-disabled="false">Add Class</button>
+					<label for="edit_class_code">Class Code</label>
+					<input type="text" name="edit_class_code" value="{{classzy.code}}" id="edit_class_code" readonly="readonly" />
+					<label for="edit_class_name">Name</label>
+					<input type="text" name="edit_class_name" value="{{classzy.name}}" id="edit_class_name"/>
+				
+					<button type="submit" data-theme="b" class="ui-btn-hidden" aria-disabled="false">Edit {{classzy.code}}</button>
 				</div>
 			</form>
+			
+
+		</div>
+	</div>
+	
+	<div data-role="page" id="add_assignment">
+
+		<div data-role="header">
+			<a data-rel="back">Back</a>
+			<h1 class="ui-title">{{classzy.code}}</h1>
+		</div>
+
+		<div data-role="content">
+
+			<h1>Add Assignment</h1>
+			<form action="/" method="post" data-ajax="false" >{% csrf_token %}
+				<div data-role="fieldcontain">
+					<label for="add_assignment_name">Assignment</label>
+					<input type="text" name="add_assignment_name" value="" id="add_assignment_name" placeholder="Assignment" />
+					
+					<fieldset data-role="controlgroup" data-type="horizontal" >
+						<input type="radio" name="add_assignment_type" id="homework" value="homework" />
+						<label for="homework" class="assign_type">Homework</label>
+						
+						<input type="radio" name="add_assignment_type" id="test" value="test" />
+						<label for="test" class="assign_type">Test</label>
+					</fieldset>
+					
+					<label for="add_assignment_due_date">Due Date</label>
+					<input type="date" name="add_assignment_due_date" value="" id="add_assignment_due_date"/>
+					<button type="submit" data-theme="b" class="ui-btn-hidden" aria-disabled="false">Edit {{classzy.code}}</button>
+				</div>
+			</form>
+			
 
 		</div>
 	</div>

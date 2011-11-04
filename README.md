@@ -20,6 +20,7 @@ Initial Setup
 --------------
 	cd Classzy
 	python manage.py syncdb
+	python manage.py migrate (after South downloaded)
 	
 - Download South http://south.aeracode.org/docs/installation.html
 

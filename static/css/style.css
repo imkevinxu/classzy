@@ -10,6 +10,17 @@ a {
 	color:red;
 }
 
+.compact {
+	padding:0;
+	margin:0;
+}
+
+.clear {
+	clear:both;
+}
+
+input[readonly] { background: #E0E0E0; color: #666; }
+
 h1#title {
 	font-size:3em;
 	margin-bottom:15px;
@@ -21,8 +32,22 @@ p.tagline {
 	text-align:center;
 }
 
+#main {
+	margin-top:-20px;
+}
 
 h1#class {
 	margin-bottom:15px;
-	float:left;
+}
+
+#add_button {
+	margin-top:30px;
+}
+
+.ui-btn, .ui-radio .ui-btn {
+	text-align:center;
+}
+
+label.assign_type {
+	width: 140px;
 }

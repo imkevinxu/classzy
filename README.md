@@ -30,6 +30,7 @@ To Run Locally
 To Push
 -------
 	git remote add deploy ssh://ec2-user@classzy.projectnyan.com/classzy/.git (only do once)
+	chmod 400 classzy.pem
 	ssh-add classzy.pem (once every time terminal is open)
 	git push origin master && git push deploy master
 

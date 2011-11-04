@@ -8,7 +8,7 @@ def home(request):
 	if request.method == 'POST':
 		try:
 			classzy = Class.objects.get(code=request.POST['class'])	
-			return render_to_response('index.html', {'class' : classzy}, context_instance=RequestContext(request))
+			return render_to_response('index.html', {'classzy' : classzy}, context_instance=RequestContext(request))
 		except:
 			return render_to_response('index.html', {'warning' : "Sorry, class code not found" }, context_instance=RequestContext(request))
 	return render_to_response('index.html', context_instance=RequestContext(request))

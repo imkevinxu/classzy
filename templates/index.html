@@ -4,23 +4,42 @@
 
 	<div data-role="page" id="login">
 
-		<div data-role="content" id="home">
+		{% if not classzy %}
+			<div data-role="content" id="home">
 			
-			<h1 id="title">Classzy</h1>
+				<h1 id="title" class="fancy">Classzy</h1>
 			
-			{% if warning%}
-				<p class="warning">{{warning}}</p>
-			{% endif %}
+				{% if warning %}
+					<p class="warning">{{warning}}</p>
+				{% endif %}
 			
-			<form action="/" method="post">{% csrf_token %}
-				<div data-role="fieldcontain" style="margin-top:-20px">
-					<input type="search" name="class" value="" />
-				</div>
-			</form>
-			<p>Examples: CS 106A, CS 107, Math 51...</p>
-			<p class="tagline">The info you <em>want</em> to know about your classes</p>
+				<form action="/" method="post">{% csrf_token %}
+					<div data-role="fieldcontain" style="margin-top:-20px">
+						<input type="search" name="class" value="" />
+					</div>
+				</form>
+				<p>Examples: CS 106A, CS 107, Math 51...</p>
+				<p class="fancy tagline">The info you <em>want</em> to know about your classes</p>
 		
-		</div>
+			</div>
+		{% endif %}
+		
+		{% if classzy %}
+			<div data-role="content" id="class">
+		
+				<h1 id="class" class="fancy">{{classzy.code}} - {{classzy.name}}</h1>
+			
+				<form action="/" method="post">{% csrf_token %}
+					<div data-role="fieldcontain" style="margin-top:-20px">
+						<input type="search" name="class" value="" />
+					</div>
+				</form>
+				<p>Examples: CS 106A, CS 107, Math 51...</p>
+				<p class="fancy tagline">The info you <em>want</em> to know about your classes</p>
+	
+			</div>
+		{% endif %}
+		
 	</div>
 	
 {% endblock %}

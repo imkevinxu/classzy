@@ -7,11 +7,18 @@
 		<div data-role="content" id="home">
 			
 			<h1 id="title">Classzy</h1>
+			
+			{% if warning%}
+				<p class="warning">{{warning}}</p>
+			{% endif %}
+			
 			<form action="/" method="post">{% csrf_token %}
-				<input type="text" name="class" value="">
-				<input type="submit" name="next" value="Find Class" />
+				<div data-role="fieldcontain" style="margin-top:-20px">
+					<input type="search" name="class" value="" />
+				</div>
 			</form>
 			<p>Examples: CS 106A, CS 107, Math 51...</p>
+			<p class="tagline">The info you <em>want</em> to know about your classes</p>
 		
 		</div>
 	</div>

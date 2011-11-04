@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
@@ -12,4 +13,10 @@ urlpatterns = patterns('',
 	
     url(r'^$', 'views.home'),
 	url(r'^profile', 'views.profile'),
+<<<<<<< HEAD
+=======
+	
+>>>>>>> baa5604c5bf9e10c9f4e1b6d018efd228a83ae23
 )
+
+urlpatterns += staticfiles_urlpatterns()

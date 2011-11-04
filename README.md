@@ -20,6 +20,8 @@ Initial Setup
 --------------
 	cd Classzy
 	python manage.py syncdb
+	
+- Download South http://south.aeracode.org/docs/installation.html
 
 To Run Locally
 --------------

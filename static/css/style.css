@@ -1,5 +1,23 @@
-h1#title {
+.fancy {
 	font-family: 'Petrona', serif;
+}
+
+h1#title {
 	font-size:3em;
 	margin-bottom:15px;
+}
+
+p.tagline {
+	font-size:1.3em;
+	margin-top:50px;
+	text-align:center;
+}
+
+.warning {
+	color:red;
+}
+
+h1#class {
+	margin-bottom:15px;
+	float:left;
 }

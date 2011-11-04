@@ -36,17 +36,36 @@
 					<input type="text" name="comment" value="Still goin..." id="comment" autofocus>
 				</div>
 				<div class="clearfix">
-					<label for="time" style="font-size:1.3em;">Time</label><br/>
-					<input type="text" name="time" value="53" id="time">
-				</div><br/>
+				<div data-role="fieldcontain">
+					<label for="slider">Time (in hours):</label>
+					<input type="number" name="hours" id="time" value="0.5" step="0.5"/ onchange="updateSlider();">
+ 					<input type="range" name="slider" id="slider" value="0.5" min="0.5" max="24" step="0.5" onchange="updateText();"/>
+				</div>
+				</div>
 				<div class="clearfix">
-					<a href="/class" class="btn large primary" style="width:200px;">Submit</a>
+					<div data-role="fieldcontain">
+					    <label for="mdy">Date</label>
+					    <input type="date" name="mdy" id="mdy"/>
+				    </div>
+				</div></br>
+				<div class="clearfix">
+					<a href="response.html" data-rel="dialog" class="btn large primary" style="width:200px;">Submit</a>
 					<input type="hidden" name="next" value="" />
-				</div>	
+				</div>
+				
 			</form>
 		</div>
 
 	</div>
 
+	<script>
+		function updateText() {
+		    document.getElementById('time').value = document.getElementById('slider').value;
+		}
+		
+		function updateSlider() {
+		    document.getElementById('slider').value = document.getElementById('time').value;
+		}
+	</script>
 </body>
 </html>

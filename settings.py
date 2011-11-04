@@ -10,10 +10,15 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+DB_DIR = '/'.join([
+    os.path.abspath( os.path.dirname( __file__ )),
+    'db',
+])
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'db',                      # Or path to database file if using sqlite3.
+        'NAME': DB_DIR,                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -140,7 +145,12 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+<<<<<<< HEAD
     'south',
+=======
+	'south',
+	'classes',
+>>>>>>> baa5604c5bf9e10c9f4e1b6d018efd228a83ae23
 )
 
 LOGIN_REDIRECT_URL = '/'

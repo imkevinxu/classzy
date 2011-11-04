@@ -145,8 +145,12 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+<<<<<<< HEAD
+    'south',
+=======
 	'south',
 	'classes',
+>>>>>>> baa5604c5bf9e10c9f4e1b6d018efd228a83ae23
 )
 
 LOGIN_REDIRECT_URL = '/'

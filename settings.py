@@ -10,10 +10,15 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+DB_DIR = '/'.join([
+    os.path.abspath( os.path.dirname( __file__ )),
+    'db',
+])
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'db',                      # Or path to database file if using sqlite3.
+        'NAME': DB_DIR,                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.

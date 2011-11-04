@@ -12,5 +12,4 @@ urlpatterns = patterns('',
 	
     url(r'^$', 'views.home'),
 	url(r'^profile', 'views.profile'),
-
 )

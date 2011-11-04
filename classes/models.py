@@ -10,11 +10,11 @@ class Class(models.Model):
 		return u'%s - %s' % (self.code, self.name)
 		
 class Assignment(models.Model):
-	classzy = models.ForeignKey(Class)
+	classzy = models.ForeignKey(Class, blank=True, null=True)
 	name = models.CharField(max_length=100, default="Assignment")
 	homework = models.BooleanField()
 	test = models.BooleanField()
-	due_date = models.DateField()
+	due_date = models.DateField(blank=True, null=True)
 
 	def __unicode__(self):
 		return u'%s - %s' % (self.classzy.code, self.name)

@@ -69,7 +69,10 @@
 		<div data-role="content" id="main">
 	
 			{% if updated %}
-				<p class="compact warning">Updated</p>
+				<p class="warning">Updated</p>
+			{% endif %}
+			{% if added %}
+				<p class="warning">Assignment added</p>
 			{% endif %}
 	
 			<h1 id="class" class="fancy">{{classzy.code}}{% if classzy.name %} - {{classzy.name}}{% endif %}</h1>
@@ -80,7 +83,6 @@
 					<div data-role="collapsible" data-theme="d" data-collapsed="true">
 						<h1>{{a.name}} ({% if a.homework %}HW{% else %}Test{% endif %})</h1>
 						<h3>Due: {{a.due_date}}</h3>
-						<p>Avg Hours - 18</p>
 					</div>
 				
 				{% endfor %}
@@ -117,7 +119,7 @@
 					<label for="edit_class_code">Class Code</label>
 					<input type="text" name="edit_class_code" value="{{classzy.code}}" id="edit_class_code" readonly="readonly" />
 					<label for="edit_class_name">Name</label>
-					<input type="text" name="edit_class_name" value="{{classzy.name}}" id="edit_class_name"/>
+					<input type="text" name="edit_class_name" value="{% if classzy.name %}{{classzy.name}}{% endif %}" id="edit_class_name"/>
 				
 					<button type="submit" data-theme="b" class="ui-btn-hidden" aria-disabled="false">Edit {{classzy.code}}</button>
 				</div>
@@ -137,12 +139,13 @@
 		<div data-role="content">
 
 			<h1>Add Assignment</h1>
-			<form action="/" method="post" data-ajax="false" >{% csrf_token %}
+			<form action="/" method="post" data-ajax="false" style="margin-top:-20px;">{% csrf_token %}
 				<div data-role="fieldcontain">
 					<label for="add_assignment_name">Assignment</label>
 					<input type="text" name="add_assignment_name" value="" id="add_assignment_name" placeholder="Assignment" />
 					
 					<fieldset data-role="controlgroup" data-type="horizontal" >
+						<legend>Type</legend>
 						<input type="radio" name="add_assignment_type" id="homework" value="homework" />
 						<label for="homework" class="assign_type">Homework</label>
 						
@@ -152,7 +155,9 @@
 					
 					<label for="add_assignment_due_date">Due Date</label>
 					<input type="date" name="add_assignment_due_date" value="" id="add_assignment_due_date"/>
-					<button type="submit" data-theme="b" class="ui-btn-hidden" aria-disabled="false">Edit {{classzy.code}}</button>
+					
+					<input type="hidden" name="add_assignment_classzy" value="{{classzy.code}}">
+					<button type="submit" data-theme="b" class="ui-btn-hidden" aria-disabled="false">Add Assignment</button>
 				</div>
 			</form>
 			

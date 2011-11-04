@@ -4,13 +4,22 @@
 	<title>Classzy</title> 
 	<meta name = "viewport" content = "initial-scale = 1.0">
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css" />
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js"></script>
-	<link rel="stylesheet" href="/static/css/style.css" />
+	<link rel="stylesheet" href="http://jquerymobile.com/demos/1.0a4.1/experiments/ui-datepicker/jquery.ui.datepicker.mobile.css" />
 	<link href='http://fonts.googleapis.com/css?family=Petrona' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="jquery.ui.datepicker.mobile.css" /> 
-	<script src="jQuery.ui.datepicker.js"></script>
-	<script src="jquery.ui.datepicker.mobile.js"></script>
+	<link rel="stylesheet" href="/static/css/style.css" />
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+	<script>
+	  //reset type=date inputs to text
+	  $( document ).bind( "mobileinit", function(){
+	    $.mobile.page.prototype.options.degradeInputs.date = false;
+	  });
+	</script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js"></script>
+	<script src="http://jquerymobile.com/demos/1.0a4.1/experiments/ui-datepicker/jQuery.ui.datepicker.js"></script>
+	<script src="/static/js/jquery.ui.datepicker.mobile.js"></script>
+	
+	
 </head>
 <body>
 	

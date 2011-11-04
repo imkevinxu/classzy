@@ -2,10 +2,11 @@
 
 {% block content %}
 
-	<div data-role="page" id="login">
+	{% if not classzy %}
+	
+		<div data-role="page" id="login">
 
-		{% if not classzy %}
-			<div data-role="content" id="home">
+			<div data-role="content">
 			
 				<h1 id="title" class="fancy">Classzy</h1>
 			
@@ -18,20 +19,56 @@
 						<input type="search" name="class" value="" />
 					</div>
 				</form>
-				<p>Examples: CS 106A, CS 107, Math 51...</p>
+				
+				{% if not warning %}
+					<p>Examples: CS 106A, CS 107, CS 147</p>
+				{% else %}
+					<p>Missing Class? <a href="#add_class">Add it</a></p>
+				{% endif %}
+					
 				<p class="fancy tagline">The info you <em>want</em> to know about your classes</p>
 		
 			</div>
-		{% endif %}
-		
-		{% if classzy %}
-			<div data-role="content" id="class">
+		</div>
+	{% endif %}
+	
+	{% if classzy %}
+		<div data-role="page" id="class">
+			
+			<div data-role="header">
+				<a data-rel="back">Back</a>
+				<h1 class="ui-title">{{classzy.code}}</h1>
+			</div>
+					
+			<div data-role="content">
 		
 				<h1 id="class" class="fancy">{{classzy.code}} - {{classzy.name}}</h1>
 	
 			</div>
-		{% endif %}
+		</div>
+	{% endif %}
 		
+	<div data-role="page" id="add_class">
+		
+		<div data-role="header">
+			<a data-rel="back">Back</a>
+			<h1 class="ui-title">Add Class</h1>
+		</div>
+		
+		<div data-role="content">
+			
+			<form action="/" method="post">{% csrf_token %}
+				<div data-role="fieldcontain">
+					<label for="class_code">Class Code</label>
+					<input type="text" name="class_code" value="" id="class_code"/>
+					
+					<button type="submit" data-theme="b" class="ui-btn-hidden" aria-disabled="false">Add Class</button>
+				</div>
+			</form>
+
+		</div>
 	</div>
+	
+
 	
 {% endblock %}

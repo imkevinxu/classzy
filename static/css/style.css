@@ -1,5 +1,13 @@
+a {
+	text-decoration:none;
+}
+
 .fancy {
 	font-family: 'Petrona', serif;
+}
+
+.warning {
+	color:red;
 }
 
 h1#title {
@@ -13,9 +21,6 @@ p.tagline {
 	text-align:center;
 }
 
-.warning {
-	color:red;
-}
 
 h1#class {
 	margin-bottom:15px;

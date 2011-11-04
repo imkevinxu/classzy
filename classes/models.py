@@ -1,7 +1,7 @@
 from django.db import models
 
 class Class(models.Model):
-	code = models.CharField(max_length=20)
+	code = models.CharField(max_length=20, primary_key=True)
 	name = models.CharField(max_length=100, blank=True, null=True)
 	professor = models.CharField(max_length=100, blank=True, null=True)
 	

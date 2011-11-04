@@ -2,9 +2,9 @@
 
 {% block content %}
 
-	{% if not classzy %}
+	{% if not classzy and not adding_warning %}
 	
-		<div data-role="page" id="login">
+		<div data-role="page" id="search">
 
 			<div data-role="content">
 			
@@ -36,13 +36,13 @@
 		<div data-role="page" id="class">
 			
 			<div data-role="header">
-				<a data-rel="back">Back</a>
+				<a href="#search" data-direction="reverse">Search</a>
 				<h1 class="ui-title">{{classzy.code}}</h1>
 			</div>
 					
 			<div data-role="content">
 		
-				<h1 id="class" class="fancy">{{classzy.code}} - {{classzy.name}}</h1>
+				<h1 id="class" class="fancy">{{classzy.code}}{% if classzy.name %} - {{classzy.name}}{% endif %}</h1>
 	
 			</div>
 		</div>
@@ -56,6 +56,10 @@
 		</div>
 		
 		<div data-role="content">
+			
+			{% if adding_warning %}
+				<p class="warning">{{adding_warning}}</p>
+			{% endif %}
 			
 			<form action="/" method="post">{% csrf_token %}
 				<div data-role="fieldcontain">

@@ -51,3 +51,16 @@ h1#class {
 label.assign_type {
 	width: 135px;
 }
+
+.due_date {
+	margin:0;
+}
+
+.ratings {
+	margin: 0;
+}
+
+.ratings p {
+	position:relative;
+	margin-left:100px;
+}

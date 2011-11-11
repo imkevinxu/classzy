@@ -1,7 +1,5 @@
-delete button
+delete button / report
 
-avg grade
 time
-comments
 
 LOTS OF FAKE DATA

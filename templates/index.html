@@ -80,33 +80,42 @@
 			{% endif %}
 	
 			<h1 id="class" class="fancy">{{classzy.code}}{% if classzy.name %} - {{classzy.name}}{% endif %}</h1>
-			
-			{% if assignments %}
-				{% for a in assignments %}
+			<div data-role="fieldcontain">
+				{% if assignments %}
+					{% for a in assignments %}
 				
-					<div data-role="collapsible" data-theme="d" data-collapsed="true">
-						<h1>{{a.name}} ({% if a.homework %}HW{% else %}Test{% endif %})</h1>
-						<h3 class="no_margin">Due: {{a.due_date}}</h3>
-						<div class="ratings">
-							{% for i in total_ratings %}
-								{% if i == a.avg_rating %}
-									<input name="{{a.name}}_{{a.due_date}}" type="radio" class="star" disabled="disabled" checked="checked"/>
-								{% else %}
-									<input name="{{a.name}}_{{a.due_date}}" type="radio" class="star" disabled="disabled"/>
-								{% endif %}
-							{% endfor %}
-							<p>{{a.num_ratings}} Difficulty Rating{% if a.num_ratings != 1 %}s{% endif %}</p>
+						<div data-role="collapsible" data-theme="d" data-collapsed="true">
+							<h1>{{a.name}} ({% if a.homework %}HW{% else %}Test{% endif %})</h1>
+							<h3 class="no_margin">Due: {{a.due_date}}</h3>
+							
+							<div class="ratings">
+								{% for i in total_ratings %}
+									{% if i == a.avg_rating %}
+										<input name="{{a.name}}_{{a.due_date}}" type="radio" class="star" disabled="disabled" checked="checked"/>
+									{% else %}
+										<input name="{{a.name}}_{{a.due_date}}" type="radio" class="star" disabled="disabled"/>
+									{% endif %}
+								{% endfor %}
+								<p>{{a.num_ratings}} Difficulty Rating{% if a.num_ratings != 1 %}s{% endif %}</p>
+							</div>
+							
+							{% if a.latest_comment_text %}
+								<div class="comment no_margin">
+									<p><strong>{{a.latest_comment_name}}</strong> - {{a.latest_comment_text}}</p>
+								</div>
+							{% endif %}
+							
+							<a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}" data-role="button" data-icon="plus" data-theme="b" id="add_button">Detailed Info</a>
 						</div>
-						<a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}" data-role="button" data-icon="plus" data-theme="b" id="add_button">Detailed Info</a>
-					</div>
 				
-				{% endfor %}
-			{% else %}
-				<div data-role="collapsible" data-theme="d" data-collapsed="true">
-					<h1>No Assignments Yet</h1>
-					<img src="/static/img/funny.gif" alt="I have done nothing productive all day" width=280/>
-				</div>
-			{% endif %}
+					{% endfor %}
+				{% else %}
+					<div data-role="collapsible" data-theme="d" data-collapsed="true">
+						<h1>No Assignments Yet</h1>
+						<img src="/static/img/funny.gif" alt="I have done nothing productive all day" width=280/>
+					</div>
+				{% endif %}
+			</div>
 			
 			<a href="#add_assignment" data-role="button" data-icon="star" data-theme="b" id="add_button">Add Assignment</a>
 
@@ -191,7 +200,7 @@
 			<div data-role="page" id="more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}">
 
 				<div data-role="header">
-					<a data-rel="back">Back</a>
+					<a href="#class" data-direction="reverse">Back</a>
 					<h1 class="ui-title">{{classzy.code}} - {{a.name}}</h1>
 					<div data-role="navbar">
 						<ul>
@@ -261,7 +270,7 @@
 			<div data-role="page" id="more_assignment_info_comments_{{a.name}}_{{a.due_date}}">
 
 				<div data-role="header">
-					<a data-rel="back">Back</a>
+					<a href="#class" data-direction="reverse">Back</a>
 					<h1 class="ui-title">{{classzy.code}} - {{a.name}}</h1>
 					<div data-role="navbar">
 						<ul>
@@ -275,6 +284,12 @@
 				<div data-role="content">
 
 					<h1>Comments</h1>
+					
+					{% for comment in a.comments.all %}
+						<div class="comment no_margin">
+							<p><strong>{{comment.name}}</strong> - {{comment.comment}}</p>
+						</div>
+					{% endfor %}
 					
 					<form action="/" method="post" data-ajax="false" >{% csrf_token %}
 						<h3 class="no_margin">Leave a tip</h3>

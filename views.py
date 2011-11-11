@@ -104,6 +104,8 @@ def home(request):
 				prev_comments = list(comments)
 				prev_comments.append(comment)
 				assignment.comments = prev_comments
+				assignment.latest_comment_name = request.POST['comment_name']
+				assignment.latest_comment_text = request.POST['comment_text']
 				assignment.save()
 			else:
 				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Cannot leave empty comment"}, context_instance=RequestContext(request))

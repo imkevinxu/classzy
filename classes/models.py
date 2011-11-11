@@ -20,6 +20,7 @@ class Assignment(models.Model):
 	ratings = models.ManyToManyField("Rating", blank=True, null=True, related_name='Assignments_Ratings')
 	avg_rating = models.IntegerField(default=0)
 	num_ratings = models.IntegerField(default=0)
+	comments = models.ManyToManyField("Comment", blank=True, null=True, related_name='Assignments_Comments')
 	
 	def __unicode__(self):
 		return u'%s - %s' % (self.classzy.code, self.name)
@@ -30,3 +31,13 @@ class Rating(models.Model):
 	
 	def __unicode__(self):
 		return u'%s : %s - %d' % (self.assignment.classzy.code, self.assignment.name, self.rating)
+
+class Comment(models.Model):
+	assignment = models.ForeignKey(Assignment, blank=True, null=True)
+	comment = models.CharField(max_length=500, blank=True, null=True)
+	name = models.CharField(max_length=500, blank=True, null=True)
+	date_created = models.DateField(auto_now_add=True)
+
+	def __unicode__(self):
+		return u'%s : %s - %s : %s' % (self.assignment.classzy.code, self.assignment.name, self.name, self.comment)
+

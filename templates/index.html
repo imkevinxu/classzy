@@ -131,13 +131,13 @@
 			<h1 style="margin-bottom:0">{{classzy.code}}</h1>
 			<form action="/" method="post" data-ajax="false" >{% csrf_token %}
 				<div data-role="fieldcontain">
-					<label for="edit_class_name">Name</label>
+					<label for="edit_class_name">Full Class Name</label>
 					<input type="text" name="edit_class_name" value="{% if classzy.name %}{{classzy.name}}{% endif %}" id="edit_class_name"/>
 					<label for="edit_class_professor">Professor</label>
 					<input type="text" name="edit_class_professor" value="{% if classzy.professor %}{{classzy.professor}}{% endif %}" id="edit_class_professor"/>
 				
 					<input type="hidden" name="edit_class_code" value="{{classzy.code}}"/>
-					<button type="submit" data-theme="b" class="ui-btn-hidden" aria-disabled="false">Edit {{classzy.code}}</button>
+					<button type="submit" data-theme="b" class="ui-btn-hidden" aria-disabled="false">Save Info</button>
 				</div>
 			</form>
 			
@@ -197,7 +197,7 @@
 						<ul>
 							<li><a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}" class="ui-btn-active">Difficulty</a></li>
 							<li><a href="b.html">Time</a></li>
-							<li><a href="b.html">Comments</a></li>
+							<li><a href="#more_assignment_info_comments_{{a.name}}_{{a.due_date}}">Comments</a></li>
 						</ul>
 					</div>
 				</div>
@@ -217,14 +217,48 @@
 					</div>
 					
 					<form action="/" method="post" data-ajax="false" >{% csrf_token %}
-							<h3 class="no_margin">How hard was {{a.name}} for you?</h3>
-							<div data-role="fieldcontain">
-								<label for="add_assignment_rating">Difficulty</label>
-							 	<input type="range" name="add_assignment_rating" id="add_assignment_rating" value="0" min="0" max="5"  />
-							</div>
+						<h3 class="no_margin">How hard was {{a.name}} for you?</h3>
+						<div data-role="fieldcontain">
+							<label for="add_assignment_rating">Difficulty</label>
+						 	<input type="range" name="add_assignment_rating" id="add_assignment_rating" value="0" min="0" max="5"  />
+						</div>
+						<input type="hidden" name="hidden_classzy" value="{{classzy.key}}"/>
+						<input type="hidden" name="add_assignment_difficulty_name" value="{{a.name}}"/>
+						<button type="submit" data-theme="b" class="ui-btn-hidden" aria-disabled="false">Add Rating</button>
+					</form>
+				</div>
+			</div>
+			
+			<div data-role="page" id="more_assignment_info_comments_{{a.name}}_{{a.due_date}}">
+
+				<div data-role="header">
+					<a data-rel="back">Back</a>
+					<h1 class="ui-title">{{classzy.code}} - {{a.name}}</h1>
+					<div data-role="navbar">
+						<ul>
+							<li><a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}">Difficulty</a></li>
+							<li><a href="b.html">Time</a></li>
+							<li><a href="#more_assignment_info_comments_{{a.name}}_{{a.due_date}}" class="ui-btn-active">Comments</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div data-role="content">
+
+					<h1>Comments</h1>
+					
+					<form action="/" method="post" data-ajax="false" >{% csrf_token %}
+						<h3 class="no_margin">Leave a tip</h3>
+						<div data-role="fieldcontain">
+							<label for="comment_name">Name</label>
+							<input type="text" name="comment_name" value="" id="comment_name"/>
+							<label for="comment_text">Comment</label>
+							<textarea cols="40" rows="8" name="comment_text" id="comment_text"></textarea>
+							
 							<input type="hidden" name="hidden_classzy" value="{{classzy.key}}"/>
-							<input type="hidden" name="add_assignment_difficulty_name" value="{{a.name}}"/>
-							<button type="submit" data-theme="b" class="ui-btn-hidden" aria-disabled="false">Add Rating</button>
+							<input type="hidden" name="add_assignment_comment_name" value="{{a.name}}"/>
+							<button type="submit" data-theme="b" class="ui-btn-hidden" aria-disabled="false">Add Comment</button>
+						</div>
 					</form>
 				</div>
 			</div>

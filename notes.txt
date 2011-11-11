@@ -1,10 +1,7 @@
-Lots of cool data
-adding reviews
-comments
 delete button
 
-ratings
 avg grade
 time
+comments
 
 LOTS OF FAKE DATA

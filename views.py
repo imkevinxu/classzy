@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanen
 from django.shortcuts import render_to_response, get_object_or_404
 from django.core.context_processors import csrf
 from django.template import RequestContext
-from classes.models import Class, Assignment, Rating
+from classes.models import Class, Assignment, Rating, Comment
 from time import strptime, strftime
 
 def home(request):
@@ -45,27 +45,30 @@ def home(request):
 		elif 'add_assignment_classzy' in request.POST:
 			classzy = Class.objects.get(key=request.POST['add_assignment_classzy'])
 			assignments = classzy.assignments.all()
-			try:
-				assignment = Assignment(name=request.POST['add_assignment_name'])
-				assignment.classzy = classzy
-				if request.POST['add_assignment_type'] == "homework":
-					assignment.homework = True		
-				if request.POST['add_assignment_type'] == "test":
-					assignment.test = True
-				assignment.due_date = request.POST['add_assignment_due_date']
-				assignment.save()
-				rating = Rating(rating=int(request.POST['add_assignment_rating']))
-				rating.assignment = assignment
-				rating.save()
-				ratings = assignment.ratings.all()
-				prev_ratings = list(ratings)
-				prev_ratings.append(rating)
-				assignment.ratings = prev_ratings
-				assignment.avg_rating = rating.rating
-				assignment.num_ratings = 1
-				assignment.save()
-			except:
-				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(assignments, key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Incorrect info submitted"}, context_instance=RequestContext(request))
+			if 'add_assignment_name' in request.POST and request.POST['add_assignment_name'] != "":
+				try:
+					assignment = Assignment(name=request.POST['add_assignment_name'])
+					assignment.classzy = classzy
+					if request.POST['add_assignment_type'] == "homework":
+						assignment.homework = True		
+					if request.POST['add_assignment_type'] == "test":
+						assignment.test = True
+					assignment.due_date = request.POST['add_assignment_due_date']
+					assignment.save()
+					rating = Rating(rating=int(request.POST['add_assignment_rating']))
+					rating.assignment = assignment
+					rating.save()
+					ratings = assignment.ratings.all()
+					prev_ratings = list(ratings)
+					prev_ratings.append(rating)
+					assignment.ratings = prev_ratings
+					assignment.avg_rating = rating.rating
+					assignment.num_ratings = 1
+					assignment.save()
+				except:
+					return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(assignments, key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Incorrect info submitted"}, context_instance=RequestContext(request))
+			else:
+				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(assignments, key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Assignment needs a name"}, context_instance=RequestContext(request))
 			prev_assignments = list(assignments)
 			prev_assignments.append(assignment)
 			classzy.assignments = prev_assignments
@@ -89,5 +92,21 @@ def home(request):
 			assignment.num_ratings += 1
 			assignment.save()
 			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New rating added"}, context_instance=RequestContext(request))
+			
+		elif 'add_assignment_comment_name' in request.POST:
+			classzy = Class.objects.get(key=request.POST['hidden_classzy'])
+			assignment = Assignment.objects.get(name=request.POST['add_assignment_comment_name'])
+			if 'comment_text' in request.POST and request.POST['comment_text'] != "" and 'comment_name' in request.POST and request.POST['comment_name'] != "":
+				comment = Comment(name=request.POST['comment_name'],comment=request.POST['comment_text'])
+				comment.assignment = assignment
+				comment.save()
+				comments = assignment.comments.all()
+				prev_comments = list(comments)
+				prev_comments.append(comment)
+				assignment.comments = prev_comments
+				assignment.save()
+			else:
+				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Cannot leave empty comment"}, context_instance=RequestContext(request))
+			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New comment added"}, context_instance=RequestContext(request))
 			
 	return render_to_response('index.html', context_instance=RequestContext(request))

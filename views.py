@@ -65,11 +65,29 @@ def home(request):
 				assignment.num_ratings = 1
 				assignment.save()
 			except:
-				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(assignments, key=lambda assignment: assignment.due_date), 'warning': "Incorrect info submitted"}, context_instance=RequestContext(request))
+				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(assignments, key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Incorrect info submitted"}, context_instance=RequestContext(request))
 			prev_assignments = list(assignments)
 			prev_assignments.append(assignment)
 			classzy.assignments = prev_assignments
 			classzy.save()
-			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date), 'added': True}, context_instance=RequestContext(request))
+			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'added': True}, context_instance=RequestContext(request))
+			
+		elif 'add_assignment_difficulty_name' in request.POST:
+			classzy = Class.objects.get(key=request.POST['hidden_classzy'])
+			assignment = Assignment.objects.get(name=request.POST['add_assignment_difficulty_name'])
+			rating = Rating(rating=int(request.POST['add_assignment_rating']))
+			rating.assignment = assignment
+			rating.save()
+			ratings = assignment.ratings.all()
+			prev_ratings = list(ratings)
+			prev_ratings.append(rating)
+			assignment.ratings = prev_ratings
+			ratings_sum = 0
+			for rate in prev_ratings:
+				ratings_sum += rate.rating
+			assignment.avg_rating = ratings_sum / len(prev_ratings)
+			assignment.num_ratings += 1
+			assignment.save()
+			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New rating added"}, context_instance=RequestContext(request))
 			
 	return render_to_response('index.html', context_instance=RequestContext(request))

@@ -25,6 +25,7 @@ class Assignment(models.Model):
 	latest_comment_text = models.CharField(max_length=500, blank=True, null=True)
 	times = models.ManyToManyField("Time", blank=True, null=True, related_name='Assignments_Times')
 	num_times = models.IntegerField(default=0)
+	chart_url = models.CharField(max_length=500, blank=True, null=True)
 	
 	def __unicode__(self):
 		return u'%s - %s' % (self.classzy.code, self.name)

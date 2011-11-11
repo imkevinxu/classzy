@@ -4,6 +4,7 @@ from django.core.context_processors import csrf
 from django.template import RequestContext
 from classes.models import Class, Assignment, Rating, Comment, Time
 from time import strptime, strftime
+from GChartWrapper import *
 
 def home(request):
 	if request.method == 'POST':
@@ -15,7 +16,8 @@ def home(request):
 				classzy.save()
 				assignments = classzy.assignments.all()
 				assignments = sorted(assignments, key=lambda assignment: assignment.due_date)
-				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : assignments, 'total_ratings' : [1, 2, 3, 4, 5]}, context_instance=RequestContext(request))
+				chart = Pie([5,10]).title('Hello Pie').color('red','lime').label('hello', 'world')
+				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : assignments, 'total_ratings' : [1, 2, 3, 4, 5], 'chart':chart}, context_instance=RequestContext(request))
 			except:
 				return render_to_response('index.html', {'warning' : "Sorry, class code not found", 'error_class' : request.POST['class'] }, context_instance=RequestContext(request))
 				
@@ -104,6 +106,25 @@ def home(request):
 			prev_times.append(time)
 			assignment.times = prev_times
 			assignment.num_times += 1
+			
+			chart_data = [0, 0, 0, 0]
+			for time in prev_times:
+				if (time.time < 10):
+					chart_data[0] += 1
+				elif (time.time < 20):
+					chart_data[1] += 1
+				elif (time.time < 30):
+					chart_data[2] += 1
+				else:
+					chart_data[3] += 1
+			G = VerticalBarStack(chart_data)
+			G.color('3D71A3')
+			G.label('0-9','10-19','20-29','30 plus')
+			G.size(250,125)
+			G.bar(50,15)
+			G.marker('N*','black',0,-1,11)
+			chart_url = str(G) + '&chds=0,'+str(max(chart_data) + 4)+'&chf=bg,s,E6E6E6'
+			assignment.chart_url = chart_url
 			assignment.save()
 			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New time added"}, context_instance=RequestContext(request))
 			

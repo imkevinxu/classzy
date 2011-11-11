@@ -80,6 +80,7 @@
 			{% endif %}
 	
 			<h1 id="class" class="fancy">{{classzy.code}}{% if classzy.name %} - {{classzy.name}}{% endif %}</h1>
+			
 			<div data-role="fieldcontain">
 				{% if assignments %}
 					{% for a in assignments %}
@@ -98,6 +99,11 @@
 								{% endfor %}
 								<p>{{a.num_ratings}} Difficulty Rating{% if a.num_ratings != 1 %}s{% endif %}</p>
 							</div>
+							
+							{% if a.chart_url %}
+								<p><strong>Hours Spent</strong> {{a.num_times}} - data points</p>
+								<img src="{{a.chart_url}}" alt="" />
+							{% endif %}
 							
 							{% if a.latest_comment_text %}
 								<div class="comment no_margin">

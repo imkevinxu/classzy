@@ -147,6 +147,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 	'south',
 	'classes',
+	'GChartWrapper',
 )
 
 LOGIN_REDIRECT_URL = '/'

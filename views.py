@@ -49,6 +49,7 @@ def home(request):
 			if request.POST['add_assignment_type'] == "test":
 				assignment.test = True
 			datestring = request.POST['add_assignment_due_date']
+			
 			due_date = strftime("%Y-%m-%d", strptime(datestring,"%m/%d/%Y"))
 			assignment.due_date = due_date
 			assignment.save()

@@ -12,15 +12,7 @@
 	<link rel="stylesheet" href="/static/css/style.css" />
 	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
-	<script>
-	  //reset type=date inputs to text
-	  $( document ).bind( "mobileinit", function(){
-	    $.mobile.page.prototype.options.degradeInputs.date = false;
-	  });
-	</script>
 	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js"></script>
-	<script src="http://jquerymobile.com/demos/1.0a4.1/experiments/ui-datepicker/jQuery.ui.datepicker.js"></script>
-	<script src="/static/js/jquery.ui.datepicker.mobile.js"></script>
 	
 	{% block js %}{% endblock %}
 	

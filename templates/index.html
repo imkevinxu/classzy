@@ -75,6 +75,9 @@
 			{% if added %}
 				<p class="warning">Assignment added</p>
 			{% endif %}
+			{% if warning %}
+				<p class="warning">{{warning}}</p>
+			{% endif %}
 	
 			<h1 id="class" class="fancy">{{classzy.code}}{% if classzy.name %} - {{classzy.name}}{% endif %}</h1>
 			

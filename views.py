@@ -42,21 +42,21 @@ def home(request):
 		elif 'add_assignment_classzy' in request.POST:
 			classzy = Class.objects.get(key=request.POST['add_assignment_classzy'])
 			assignments = classzy.assignments.all()
-			assignment = Assignment(name=request.POST['add_assignment_name'])
-			assignment.classzy = classzy
-			if request.POST['add_assignment_type'] == "homework":
-				assignment.homework = True		
-			if request.POST['add_assignment_type'] == "test":
-				assignment.test = True
-			datestring = request.POST['add_assignment_due_date']
-			
-			due_date = strftime("%Y-%m-%d", strptime(datestring,"%m/%d/%Y"))
-			assignment.due_date = due_date
-			assignment.save()
+			try:
+				assignment = Assignment(name=request.POST['add_assignment_name'])
+				assignment.classzy = classzy
+				if request.POST['add_assignment_type'] == "homework":
+					assignment.homework = True		
+				if request.POST['add_assignment_type'] == "test":
+					assignment.test = True
+				assignment.due_date = request.POST['add_assignment_due_date']
+				assignment.save()
+			except:
+				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : assignments, 'warning': "Incorrect info submitted"}, context_instance=RequestContext(request))
 			prev_assignments = list(assignments)
 			prev_assignments.append(assignment)
 			classzy.assignments = prev_assignments
-			classzy.save()
+			#classzy.save()
 			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : classzy.assignments.all(), 'added': True}, context_instance=RequestContext(request))
 			
 	return render_to_response('index.html', context_instance=RequestContext(request))

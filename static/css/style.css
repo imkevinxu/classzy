@@ -65,7 +65,6 @@ label.assign_type {
 	margin-left:100px;
 }
 
-.name {
-	font-weight:600;
+.comment strong {
 	color:#3D71A3;
 }

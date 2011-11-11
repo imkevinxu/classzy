@@ -107,7 +107,7 @@
 							
 							{% if a.latest_comment_text %}
 								<div class="comment no_margin">
-									<p><span class="name">{{a.latest_comment_name}}</span> - {{a.latest_comment_text}}</p>
+									<p><strong>{{a.latest_comment_name}}</strong> - {{a.latest_comment_text}}</p>
 								</div>
 							{% endif %}
 							
@@ -295,7 +295,7 @@
 					
 					{% for comment in a.comments.all %}
 						<div class="comment no_margin">
-							<p><span class="name">{{comment.name}}</span> - {{comment.comment}}</p>
+							<p><strong>{{comment.name}}</strong> - {{comment.comment}}</p>
 						</div>
 					{% endfor %}
 					

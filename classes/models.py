@@ -21,6 +21,8 @@ class Assignment(models.Model):
 	avg_rating = models.IntegerField(default=0)
 	num_ratings = models.IntegerField(default=0)
 	comments = models.ManyToManyField("Comment", blank=True, null=True, related_name='Assignments_Comments')
+	latest_comment_name = models.CharField(max_length=500, blank=True, null=True)
+	latest_comment_text = models.CharField(max_length=500, blank=True, null=True)
 	
 	def __unicode__(self):
 		return u'%s - %s' % (self.classzy.code, self.name)

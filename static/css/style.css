@@ -64,3 +64,7 @@ label.assign_type {
 	position:relative;
 	margin-left:100px;
 }
+
+.comment strong {
+	color:#3D71A3;
+}

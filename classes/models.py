@@ -23,6 +23,8 @@ class Assignment(models.Model):
 	comments = models.ManyToManyField("Comment", blank=True, null=True, related_name='Assignments_Comments')
 	latest_comment_name = models.CharField(max_length=500, blank=True, null=True)
 	latest_comment_text = models.CharField(max_length=500, blank=True, null=True)
+	times = models.ManyToManyField("Time", blank=True, null=True, related_name='Assignments_Times')
+	num_times = models.IntegerField(default=0)
 	
 	def __unicode__(self):
 		return u'%s - %s' % (self.classzy.code, self.name)
@@ -43,3 +45,9 @@ class Comment(models.Model):
 	def __unicode__(self):
 		return u'%s : %s - %s : %s' % (self.assignment.classzy.code, self.assignment.name, self.name, self.comment)
 
+class Time(models.Model):
+	assignment = models.ForeignKey(Assignment, blank=True, null=True)
+	time = models.IntegerField(default=0)
+	
+	def __unicode__(self):
+		return u'%s : %s - %d hours' % (self.assignment.classzy.code, self.assignment.name, self.time)

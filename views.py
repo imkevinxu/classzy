@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanen
 from django.shortcuts import render_to_response, get_object_or_404
 from django.core.context_processors import csrf
 from django.template import RequestContext
-from classes.models import Class, Assignment, Rating, Comment
+from classes.models import Class, Assignment, Rating, Comment, Time
 from time import strptime, strftime
 
 def home(request):
@@ -92,6 +92,20 @@ def home(request):
 			assignment.num_ratings += 1
 			assignment.save()
 			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New rating added"}, context_instance=RequestContext(request))
+			
+		elif 'add_assignment_time_name' in request.POST:
+			classzy = Class.objects.get(key=request.POST['hidden_classzy'])
+			assignment = Assignment.objects.get(name=request.POST['add_assignment_time_name'])
+			time = Time(time=int(request.POST['add_assignment_time']))
+			time.assignment = assignment
+			time.save()
+			times = assignment.times.all()
+			prev_times = list(times)
+			prev_times.append(time)
+			assignment.times = prev_times
+			assignment.num_times += 1
+			assignment.save()
+			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New time added"}, context_instance=RequestContext(request))
 			
 		elif 'add_assignment_comment_name' in request.POST:
 			classzy = Class.objects.get(key=request.POST['hidden_classzy'])

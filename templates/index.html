@@ -237,16 +237,17 @@
 					</form>
 				</div>
 			</div>
+
 			<div data-role="page" id="more_assignment_info_time_{{a.name}}_{{a.due_date}}">
 
 				<div data-role="header">
-					<a data-rel="back">Back</a>
+					<a href="#class" data-direction="reverse">Back</a>
 					<h1 class="ui-title">{{classzy.code}} - {{a.name}}</h1>
 					<div data-role="navbar">
 						<ul>
 							<li><a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}">Difficulty</a></li>
-							<li><a href="#more_assignment_info_time_{{a.name}}_{{a.due_date}}">Time</a></li>
-							<li><a href="#more_assignment_info_comments_{{a.name}}_{{a.due_date}}" class="ui-btn-active">Comments</a></li>
+							<li><a href="#more_assignment_info_time_{{a.name}}_{{a.due_date}}" class="ui-btn-active">Time</a></li>
+							<li><a href="#more_assignment_info_comments_{{a.name}}_{{a.due_date}}">Comments</a></li>
 						</ul>
 					</div>
 				</div>
@@ -256,17 +257,18 @@
 					<h1>Time</h1>
 					
 					<form action="/" method="post" data-ajax="false" >{% csrf_token %}
-						<h3 class="no_margin">How many hours did it take you to finish {{a.name}}?</h3>
+						<h3 class="no_margin">Hours spent on {{a.name}}?</h3>
 						<div data-role="fieldcontain">
-							<label for="add_assignment_time">Difficulty</label>
+							<label for="add_assignment_time">Time</label>
 						 	<input type="range" name="add_assignment_time" id="add_assignment_time" value="0" min="0" max="40"  />
 						</div>
 						<input type="hidden" name="hidden_classzy" value="{{classzy.key}}"/>
 						<input type="hidden" name="add_assignment_time_name" value="{{a.name}}"/>
-						<button type="submit" data-theme="b" class="ui-btn-hidden" aria-disabled="false">Submit Time</button>
+						<button type="submit" data-theme="b" class="ui-btn-hidden" aria-disabled="false">Add Time</button>
 					</form>
 				</div>
 			</div>
+
 			<div data-role="page" id="more_assignment_info_comments_{{a.name}}_{{a.due_date}}">
 
 				<div data-role="header">

@@ -9,20 +9,23 @@ def home(request):
 	if request.method == 'POST':
 		if 'class' in request.POST:
 			try:
-				classzy = Class.objects.get(code=request.POST['class'])	
+				classzy_key = request.POST['class'].lower().replace(' ','')
+				classzy = Class.objects.get(key=classzy_key)	
 				classzy.views += 1
 				classzy.save()
 				assignments = classzy.assignments.all()
 				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : assignments}, context_instance=RequestContext(request))
 			except:
-				return render_to_response('index.html', {'warning' : "Sorry, class code not found" }, context_instance=RequestContext(request))
+				return render_to_response('index.html', {'warning' : "Sorry, class code not found", 'error_class' : request.POST['class'] }, context_instance=RequestContext(request))
 				
 		elif 'class_code' in request.POST:
 			try:
-				classzy = Class.objects.get(code=request.POST['class_code'])
+				classzy_key = request.POST['class_code'].lower().replace(' ','')
+				classzy = Class.objects.get(key=classzy_key)
 				return render_to_response('index.html', {'adding_warning' : "That class is already in Classzy!" }, context_instance=RequestContext(request))
 			except:
-				classzy = Class(code=request.POST['class_code'])
+				classzy_key = request.POST['class_code'].lower().replace(' ','')
+				classzy = Class(key=classzy_key, code=request.POST['class_code'])
 				classzy.views += 1
 				classzy.save()
 				assignments = classzy.assignments.all()
@@ -31,12 +34,13 @@ def home(request):
 		elif 'edit_class_code' in request.POST:
 			classzy = Class.objects.get(code=request.POST['edit_class_code'])
 			classzy.name = request.POST['edit_class_name']
+			classzy.professor = request.POST['edit_class_professor']
 			classzy.save()
 			assignments = classzy.assignments.all()
 			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : assignments, 'updated': True}, context_instance=RequestContext(request))
 			
 		elif 'add_assignment_classzy' in request.POST:
-			classzy = Class.objects.get(code=request.POST['add_assignment_classzy'])
+			classzy = Class.objects.get(key=request.POST['add_assignment_classzy'])
 			assignments = classzy.assignments.all()
 			assignment = Assignment(name=request.POST['add_assignment_name'])
 			assignment.classzy = classzy

@@ -1,8 +1,10 @@
 from django.db import models
 
 class Class(models.Model):
-	code = models.CharField(max_length=20, primary_key=True)
+	key = models.CharField(max_length=20, primary_key=True)
+	code = models.CharField(max_length=20)
 	name = models.CharField(max_length=100, blank=True, null=True)
+	professor = models.CharField(max_length=100, blank=True, null=True)
 	views = models.IntegerField(default=0)
 	assignments = models.ManyToManyField("Assignment", blank=True, null=True, related_name='Class_Assignments')
 	

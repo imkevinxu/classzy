@@ -1,7 +1,3 @@
 
 calendar bug
 empty form
-
-Input more lenient
-edit turn into more info
-Shortcut touching not working on homepage

@@ -2,7 +2,6 @@ Input more lenient
 calendar bug
 empty form
 
-no zoom
 search button on home page
 
 edit turn into more info

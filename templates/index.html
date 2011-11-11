@@ -217,7 +217,7 @@
 					</div>
 					
 					<form action="/" method="post" data-ajax="false" >{% csrf_token %}
-							<h3 class="no_margin">How did you feel about {{a.name}}?</h3>
+							<h3 class="no_margin">How hard was {{a.name}} for you?</h3>
 							<div data-role="fieldcontain">
 								<label for="add_assignment_rating">Difficulty</label>
 							 	<input type="range" name="add_assignment_rating" id="add_assignment_rating" value="0" min="0" max="5"  />

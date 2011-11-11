@@ -15,7 +15,7 @@ def home(request):
 				classzy.views += 1
 				classzy.save()
 				assignments = classzy.assignments.all()
-				assignments = sorted(assignments, key=lambda assignment: assignment.due_date)
+				assignments = sorted(assignments, key=lambda assignment: assignment.due_date, reverse=True)
 				chart = Pie([5,10]).title('Hello Pie').color('red','lime').label('hello', 'world')
 				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : assignments, 'total_ratings' : [1, 2, 3, 4, 5], 'chart':chart}, context_instance=RequestContext(request))
 			except:
@@ -28,11 +28,11 @@ def home(request):
 				return render_to_response('index.html', {'adding_warning' : "That class is already in Classzy!" }, context_instance=RequestContext(request))
 			except:
 				classzy_key = request.POST['class_code'].lower().replace(' ','')
-				classzy = Class(key=classzy_key, code=request.POST['class_code'])
+				classzy = Class(key=classzy_key, code=request.POST['class_code'].upper())
 				classzy.views += 1
 				classzy.save()
 				assignments = classzy.assignments.all()
-				assignments = sorted(assignments, key=lambda assignment: assignment.due_date)
+				assignments = sorted(assignments, key=lambda assignment: assignment.due_date, reverse=True)
 				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : assignments, 'total_ratings' : [1, 2, 3, 4, 5]}, context_instance=RequestContext(request))
 				
 		elif 'edit_class_code' in request.POST:
@@ -41,7 +41,7 @@ def home(request):
 			classzy.professor = request.POST['edit_class_professor']
 			classzy.save()
 			assignments = classzy.assignments.all()
-			assignments = sorted(assignments, key=lambda assignment: assignment.due_date)
+			assignments = sorted(assignments, key=lambda assignment: assignment.due_date, reverse=True)
 			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : assignments, 'total_ratings' : [1, 2, 3, 4, 5], 'updated': True}, context_instance=RequestContext(request))
 			
 		elif 'add_assignment_classzy' in request.POST:
@@ -68,14 +68,14 @@ def home(request):
 					assignment.num_ratings = 1
 					assignment.save()
 				except:
-					return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(assignments, key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Incorrect info submitted"}, context_instance=RequestContext(request))
+					return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(assignments, key=lambda assignment: assignment.due_date, reverse=True), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Incorrect info submitted"}, context_instance=RequestContext(request))
 			else:
-				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(assignments, key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Assignment needs a name"}, context_instance=RequestContext(request))
+				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(assignments, key=lambda assignment: assignment.due_date, reverse=True), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Assignment needs a name"}, context_instance=RequestContext(request))
 			prev_assignments = list(assignments)
 			prev_assignments.append(assignment)
 			classzy.assignments = prev_assignments
 			classzy.save()
-			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'added': True}, context_instance=RequestContext(request))
+			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date, reverse=True), 'total_ratings' : [1, 2, 3, 4, 5], 'added': True}, context_instance=RequestContext(request))
 			
 		elif 'add_assignment_difficulty_name' in request.POST:
 			classzy = Class.objects.get(key=request.POST['hidden_classzy'])
@@ -93,7 +93,7 @@ def home(request):
 			assignment.avg_rating = ratings_sum / len(prev_ratings)
 			assignment.num_ratings += 1
 			assignment.save()
-			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New rating added"}, context_instance=RequestContext(request))
+			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date, reverse=True), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New rating added"}, context_instance=RequestContext(request))
 			
 		elif 'add_assignment_time_name' in request.POST:
 			classzy = Class.objects.get(key=request.POST['hidden_classzy'])
@@ -126,7 +126,7 @@ def home(request):
 			chart_url = str(G) + '&chds=0,'+str(max(chart_data) + 4)+'&chf=bg,s,E6E6E6'
 			assignment.chart_url = chart_url
 			assignment.save()
-			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New time added"}, context_instance=RequestContext(request))
+			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date, reverse=True), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New time added"}, context_instance=RequestContext(request))
 			
 		elif 'add_assignment_comment_name' in request.POST:
 			classzy = Class.objects.get(key=request.POST['hidden_classzy'])
@@ -143,7 +143,7 @@ def home(request):
 				assignment.latest_comment_text = request.POST['comment_text']
 				assignment.save()
 			else:
-				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Cannot leave empty comment"}, context_instance=RequestContext(request))
-			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New comment added"}, context_instance=RequestContext(request))
+				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date, reverse=True), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Cannot leave empty comment"}, context_instance=RequestContext(request))
+			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date, reverse=True), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New comment added"}, context_instance=RequestContext(request))
 			
 	return render_to_response('index.html', context_instance=RequestContext(request))

@@ -11,6 +11,8 @@ Pre-requisites
 - Install Github
 - Install Python
 - Install Django
+- Download South http://south.aeracode.org/docs/installation.html
+- Download GChartWrapper http://code.google.com/p/google-chartwrapper/
 
 To Import Everything
 --------------------
@@ -20,9 +22,8 @@ Initial Setup
 --------------
 	cd Classzy
 	python manage.py syncdb
-	python manage.py migrate (after South downloaded)
+	python manage.py migrate
 	
-- Download South http://south.aeracode.org/docs/installation.html
 
 To Run Locally
 --------------

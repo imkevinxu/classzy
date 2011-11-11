@@ -1,2 +1,4 @@
 LOTS OF FAKE DATA
 TESTS SHOULD HAVE DIFFERENT PARAMS
+	- no need to (HW) or (Test)
+	- ask diff questions and show diff things

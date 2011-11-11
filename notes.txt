@@ -1,8 +1,7 @@
-Input more lenient
+
 calendar bug
 empty form
 
-search button on home page
-
+Input more lenient
 edit turn into more info
 Shortcut touching not working on homepage

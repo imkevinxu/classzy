@@ -129,7 +129,7 @@
 		
 		
 		<div data-role="footer"> 
-			<h4>Total Views: {{classzy.views}}</h4> 
+			<h4>Total Views: {{classzy.views}}</h4>
 		</div>
 	</div>
 	
@@ -189,7 +189,7 @@
 					
 					<div data-role="fieldcontain">
 						<label for="add_assignment_rating">Difficulty</label>
-					 	<input type="range" name="add_assignment_rating" id="add_assignment_rating" value="0" min="0" max="5"  />
+					 	<input type="range" name="add_assignment_rating" id="add_assignment_rating" value="0" min="1" max="5"  />
 					</div>
 					
 					<input type="hidden" name="add_assignment_classzy" value="{{classzy.key}}">
@@ -235,7 +235,7 @@
 						<h3 class="no_margin">How hard was {{a.name}} for you?</h3>
 						<div data-role="fieldcontain">
 							<label for="add_assignment_rating">Difficulty</label>
-						 	<input type="range" name="add_assignment_rating" id="add_assignment_rating" value="0" min="0" max="5"  />
+						 	<input type="range" name="add_assignment_rating" id="add_assignment_rating" value="0" min="1" max="5"  />
 						</div>
 						<input type="hidden" name="hidden_classzy" value="{{classzy.key}}"/>
 						<input type="hidden" name="add_assignment_difficulty_name" value="{{a.name}}"/>
@@ -262,11 +262,16 @@
 
 					<h1>Time</h1>
 					
+					{% if a.chart_url %}
+						<p><strong>Hours Spent</strong> from {{a.num_times}} data points</p>
+						<img src="{{a.chart_url}}" alt="" />
+					{% endif %}
+					
 					<form action="/" method="post" data-ajax="false" >{% csrf_token %}
-						<h3 class="no_margin">Hours spent on {{a.name}}?</h3>
+						<h3 class="no_margin">How much time did you spend on {{a.name}}?</h3>
 						<div data-role="fieldcontain">
-							<label for="add_assignment_time">Time</label>
-						 	<input type="range" name="add_assignment_time" id="add_assignment_time" value="0" min="0" max="40"  />
+							<label for="add_assignment_time">Hours</label>
+						 	<input type="range" name="add_assignment_time" id="add_assignment_time" value="0" min="1" max="40"  />
 						</div>
 						<input type="hidden" name="hidden_classzy" value="{{classzy.key}}"/>
 						<input type="hidden" name="add_assignment_time_name" value="{{a.name}}"/>

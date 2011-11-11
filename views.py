@@ -123,7 +123,11 @@ def home(request):
 			G.size(250,125)
 			G.bar(50,15)
 			G.marker('N*','black',0,-1,11)
-			chart_url = str(G) + '&chds=0,'+str(max(chart_data) + 4)+'&chf=bg,s,E6E6E6'
+			if (max(chart_data) > 20):
+				max_range = max(chart_data) + 4
+			else:
+				max_range = max(chart_data) + 1
+			chart_url = str(G) + '&chds=0,'+str(max_range)+'&chf=bg,s,E6E6E6'
 			assignment.chart_url = chart_url
 			assignment.save()
 			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date, reverse=True), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New time added"}, context_instance=RequestContext(request))

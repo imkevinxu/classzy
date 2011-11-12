@@ -22,7 +22,7 @@
 					</form>
 			
 					{% if not warning %}
-						<p>Examples: <a href="#" onTouchStart="document.getElementById('search_box').value = 'CS 107'; document.getElementById('search_form').submit();">CS 107</a>, <a href="#" onTouchStart="document.getElementById('search_box').value = 'CS 147'; document.getElementById('search_form').submit();">CS 147</a>, <a href="#" onTouchStart="document.getElementById('search_box').value = 'Math 51'; document.getElementById('search_form').submit();">Math 51</a></p>
+						<p>Examples: <a href="#" onClick="document.getElementById('search_box').value = 'CS 107'; document.getElementById('search_form').submit();" onTouchStart="document.getElementById('search_box').value = 'CS 107'; document.getElementById('search_form').submit();">CS 107</a>, <a href="#" onClick="document.getElementById('search_box').value = 'CS 147'; document.getElementById('search_form').submit();" onTouchStart="document.getElementById('search_box').value = 'CS 147'; document.getElementById('search_form').submit();">CS 147</a>, <a href="#" onClick="document.getElementById('search_box').value = 'Math 51'; document.getElementById('search_form').submit();" onTouchStart="document.getElementById('search_box').value = 'Math 51'; document.getElementById('search_form').submit();">Math 51</a></p>
 					{% else %}
 						<p>Missing Class? <a href="#add_class">Add it</a></p>
 					{% endif %}

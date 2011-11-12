@@ -21,7 +21,9 @@ def home(request):
 			except:
 				return render_to_response('index.html', {'warning' : "Sorry, class code not found", 'error_class' : request.POST['class'] }, context_instance=RequestContext(request))
 				
-		elif 'class_code' in request.POST and request.POST['class_code'] != "":
+		elif 'class_code' in request.POST:
+			if request.POST['class_code'] == "":
+				return render_to_response('index.html', {'adding_warning' : "Class Code cannot be empty" }, context_instance=RequestContext(request))
 			try:
 				classzy_key = request.POST['class_code'].lower().replace(' ','')
 				classzy = Class.objects.get(key=classzy_key)

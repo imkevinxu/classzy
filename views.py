@@ -5,6 +5,7 @@ from django.template import RequestContext
 from time import strptime, strftime
 from classes.models import *
 from GChartWrapper import *
+import numpy
 
 def home(request):
 	if request.method == 'POST':
@@ -123,7 +124,7 @@ def home(request):
 			G.size(250,125)
 			G.bar(37,15)
 			G.marker('N*','black',0,-1,11)
-			if (max(chart_data) > 20):
+			if (max(chart_data) > 10):
 				max_range = max(chart_data) + 4
 			else:
 				max_range = max(chart_data) + 1
@@ -143,6 +144,15 @@ def home(request):
 			prev_times.append(time)
 			assignment.times = prev_times
 			assignment.num_times += 1
+			time_array = []
+			for time in prev_times:
+				time_array.append(time.time)
+				if assignment.min_time == 0 or time.time < assignment.min_time:
+					assignment.min_time = time.time
+				if assignment.max_time == 0 or time.time > assignment.max_time:
+					assignment.max_time = time.time
+			assignment.avg_time = numpy.average(time_array)
+			assignment.std_time = numpy.std(time_array)
 			
 			chart_data = [0, 0, 0, 0]
 			for time in prev_times:
@@ -160,7 +170,7 @@ def home(request):
 			G.size(250,125)
 			G.bar(50,15)
 			G.marker('N*','black',0,-1,11)
-			if (max(chart_data) > 20):
+			if (max(chart_data) > 10):
 				max_range = max(chart_data) + 4
 			else:
 				max_range = max(chart_data) + 1

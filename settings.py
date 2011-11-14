@@ -149,6 +149,7 @@ INSTALLED_APPS = (
 	'south',
 	'classes',
 	'GChartWrapper',
+	'numpy',
 )
 
 LOGIN_REDIRECT_URL = '/'

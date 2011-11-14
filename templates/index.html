@@ -295,6 +295,24 @@
 					{% if a.chart_url %}
 						<p><strong>Hours Spent</strong> from {{a.num_times}} data points</p>
 						<img src="{{a.chart_url}}" alt="" />
+						
+                        <table>
+                            <tr>
+                                <td>Average</td>
+                                <td>{{a.avg_time}}</td>
+                                <td> hours</td>
+                            </tr>
+                            <tr>
+                                <td>Standard Dev</td>
+                                <td>{{a.std_time}}</td>
+                                <td> hours</td>
+                            </tr>
+                            <tr>
+                                <td>Range</td>
+                                <td>{{a.min_time}} - {{a.max_time}}</td>
+                                <td> hours</td>
+                            </tr>
+                        </table>
 					{% endif %}
 					
 					<form action="/" method="post" data-ajax="false" >{% csrf_token %}

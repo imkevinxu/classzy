@@ -3,9 +3,6 @@ TESTS SHOULD HAVE DIFFERENT PARAMS
 	- ask diff questions and show diff things
 
 
-Average time, standard dev, range, mean, median
-time distribution
-
 void difficiculty for future assignments
 class URLs
 after should go to edit page not home

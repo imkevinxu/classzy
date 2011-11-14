@@ -13,6 +13,7 @@ Pre-requisites
 - Install Django
 - Download South http://south.aeracode.org/docs/installation.html
 - Download GChartWrapper http://code.google.com/p/google-chartwrapper/
+- Download numpy http://numpy.scipy.org/
 
 To Import Everything
 --------------------

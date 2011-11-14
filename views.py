@@ -151,8 +151,8 @@ def home(request):
 					assignment.min_time = time.time
 				if assignment.max_time == 0 or time.time > assignment.max_time:
 					assignment.max_time = time.time
-			assignment.avg_time = numpy.average(time_array)
-			assignment.std_time = numpy.std(time_array)
+			assignment.avg_time = str(numpy.average(time_array))
+			assignment.std_time = str(numpy.std(time_array))
 			
 			chart_data = [0, 0, 0, 0]
 			for time in prev_times:

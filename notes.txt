@@ -5,7 +5,8 @@ TESTS SHOULD HAVE DIFFERENT PARAMS
 
 void difficiculty for future assignments
 class URLs
-after should go to edit page not home
 
 look into updating visuals
 make it more web-friendly?
+
+After adding time, goes back to assignment screen instead of going back to the add screens (not very intuitive) - bigger adding message

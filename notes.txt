@@ -1,8 +1,15 @@
 LOTS OF FAKE DATA
 TESTS SHOULD HAVE DIFFERENT PARAMS
-	- no need to (HW) or (Test)
 	- ask diff questions and show diff things
 	
 Average time, standard dev, range, mean, median
-left or right pane switch
 void difficiculty for future assignments
+class URLs
+
+delete assign + class
+difficulty rating distribution
+time distribution
+classzy loading on touch of tag
+
+look into updating visuals
+make it more web-friendly?

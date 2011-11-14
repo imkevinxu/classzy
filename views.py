@@ -16,8 +16,7 @@ def home(request):
 				classzy.save()
 				assignments = classzy.assignments.all()
 				assignments = sorted(assignments, key=lambda assignment: assignment.due_date, reverse=True)
-				chart = Pie([5,10]).title('Hello Pie').color('red','lime').label('hello', 'world')
-				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : assignments, 'total_ratings' : [1, 2, 3, 4, 5], 'chart':chart}, context_instance=RequestContext(request))
+				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : assignments, 'total_ratings' : [1, 2, 3, 4, 5]}, context_instance=RequestContext(request))
 			except:
 				return render_to_response('index.html', {'warning' : "Sorry, class code not found", 'error_class' : request.POST['class'] }, context_instance=RequestContext(request))
 				

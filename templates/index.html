@@ -22,7 +22,7 @@
 					</form>
 			
 					{% if not warning %}
-						<p>Examples: <a href="#" onClick="document.getElementById('search_box').value = 'CS 107'; document.getElementById('search_form').submit();" onTouchStart="document.getElementById('search_box').value = 'CS 107'; document.getElementById('search_form').submit();">CS 107</a>, <a href="#" onClick="document.getElementById('search_box').value = 'CS 147'; document.getElementById('search_form').submit();" onTouchStart="document.getElementById('search_box').value = 'CS 147'; document.getElementById('search_form').submit();">CS 147</a>, <a href="#" onClick="document.getElementById('search_box').value = 'Math 51'; document.getElementById('search_form').submit();" onTouchStart="document.getElementById('search_box').value = 'Math 51'; document.getElementById('search_form').submit();">Math 51</a></p>
+						<p>Examples: <a href="#" onClick="document.getElementById('search_box').value = 'CS 107'; document.getElementById('search_form').submit();$.mobile.pageLoading();" onTouchStart="document.getElementById('search_box').value = 'CS 107'; document.getElementById('search_form').submit();$.mobile.pageLoading();">CS 107</a>, <a href="#" onClick="document.getElementById('search_box').value = 'CS 147'; document.getElementById('search_form').submit();$.mobile.pageLoading();" onTouchStart="document.getElementById('search_box').value = 'CS 147'; document.getElementById('search_form').submit();$.mobile.pageLoading();">CS 147</a>, <a href="#" onClick="document.getElementById('search_box').value = 'Math 51'; document.getElementById('search_form').submit();$.mobile.pageLoading();" onTouchStart="document.getElementById('search_box').value = 'Math 51'; document.getElementById('search_form').submit();$.mobile.pageLoading();">Math 51</a></p>
 					{% else %}
 						<p>Missing Class? <a href="#add_class">Add it</a></p>
 					{% endif %}
@@ -86,7 +86,7 @@
 					{% for a in assignments %}
 				
 						<div data-role="collapsible" data-theme="d" data-collapsed="true">
-							<h1>{{a.name}} ({% if a.homework %}HW{% else %}Test{% endif %})</h1>
+							<h1>{{a.name}}</h1>
 							<h3 class="no_margin">Due: {{a.due_date}}</h3>
 							
 							<div class="ratings">
@@ -111,7 +111,7 @@
 								</div>
 							{% endif %}
 							
-							<a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}" data-role="button" data-icon="plus" data-theme="b" id="add_button">Detailed Info</a>
+							<a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}" data-role="button" data-icon="plus" data-transition="flip" data-theme="b" id="add_button">Detailed Info</a>
 						</div>
 				
 					{% endfor %}
@@ -206,7 +206,7 @@
 			<div data-role="page" id="more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}">
 
 				<div data-role="header">
-					<a href="#class" data-direction="reverse">Back</a>
+					<a href="#class" data-direction="flip">Back</a>
 					<h1 class="ui-title">{{classzy.code}} - {{a.name}}</h1>
 					<div data-role="navbar">
 						<ul>
@@ -247,11 +247,11 @@
 			<div data-role="page" id="more_assignment_info_time_{{a.name}}_{{a.due_date}}">
 
 				<div data-role="header">
-					<a href="#class" data-direction="reverse">Back</a>
+					<a href="#class" data-direction="flip">Back</a>
 					<h1 class="ui-title">{{classzy.code}} - {{a.name}}</h1>
 					<div data-role="navbar">
 						<ul>
-							<li><a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}">Difficulty</a></li>
+							<li><a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}" data-direction="reverse">Difficulty</a></li>
 							<li><a href="#more_assignment_info_time_{{a.name}}_{{a.due_date}}" class="ui-btn-active">Time</a></li>
 							<li><a href="#more_assignment_info_comments_{{a.name}}_{{a.due_date}}">Comments</a></li>
 						</ul>
@@ -283,12 +283,12 @@
 			<div data-role="page" id="more_assignment_info_comments_{{a.name}}_{{a.due_date}}">
 
 				<div data-role="header">
-					<a href="#class" data-direction="reverse">Back</a>
+					<a href="#class" data-direction="flip">Back</a>
 					<h1 class="ui-title">{{classzy.code}} - {{a.name}}</h1>
 					<div data-role="navbar">
 						<ul>
-							<li><a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}">Difficulty</a></li>
-							<li><a href="#more_assignment_info_time_{{a.name}}_{{a.due_date}}">Time</a></li>
+							<li><a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}" data-direction="reverse">Difficulty</a></li>
+							<li><a href="#more_assignment_info_time_{{a.name}}_{{a.due_date}}" data-direction="reverse">Time</a></li>
 							<li><a href="#more_assignment_info_comments_{{a.name}}_{{a.due_date}}" class="ui-btn-active">Comments</a></li>
 						</ul>
 					</div>

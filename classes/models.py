@@ -20,6 +20,7 @@ class Assignment(models.Model):
 	test = models.BooleanField()
 	due_date = models.DateField(blank=True, null=True)
 	ratings = models.ManyToManyField("Rating", blank=True, null=True, related_name='Assignments_Ratings')
+	ratings_chart_url = models.CharField(max_length=500, blank=True, null=True)
 	avg_rating = models.IntegerField(default=0)
 	num_ratings = models.IntegerField(default=0)
 	comments = models.ManyToManyField("Comment", blank=True, null=True, related_name='Assignments_Comments')

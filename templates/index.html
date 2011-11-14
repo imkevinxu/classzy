@@ -256,6 +256,8 @@
 							{% endif %}
 						{% endfor %}
 						<p>{{a.num_ratings}} Difficulty Rating{% if a.num_ratings != 1 %}s{% endif %}</p>
+						
+						<img src="{{a.ratings_chart_url}}" alt="" />
 					</div>
 					
 					<form action="/" method="post" data-ajax="false" >{% csrf_token %}

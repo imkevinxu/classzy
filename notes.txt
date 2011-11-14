@@ -1,12 +1,10 @@
-LOTS OF FAKE DATA
-TESTS SHOULD HAVE DIFFERENT PARAMS
-	- ask diff questions and show diff things
-
-
-void difficiculty for future assignments
-class URLs
-
-look into updating visuals
-make it more web-friendly?
+CREATE LOTS OF FAKE DATA
 
 After adding time, goes back to assignment screen instead of going back to the add screens (not very intuitive) - bigger adding message
+
+Adding tests should have different model
+Future assignments don't need difficulty rating
+
+Creating custom URLs
+Updating Visual Design
+Web-friendly (inside iPhone model)

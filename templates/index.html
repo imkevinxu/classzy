@@ -233,8 +233,8 @@
 
 				<div data-role="header">
 					<a href="#class" data-transition="flip" data-icon="back">Back</a>
-					<h1 class="ui-title">{{classzy.code}} - {{a.name}}</h1>
-					<a href="#delete_assignment" data-icon="alert" data-iconpos="right" class="ui-btn-right">Delete</a>
+					<h1 class="ui-title">{{a.name}}</h1>
+					<a href="#delete_assignment_{{a.name}}_{{a.due_date}}" data-icon="alert" data-iconpos="right" class="ui-btn-right">Delete</a>
 					<div data-role="navbar">
 						<ul>
 							<li><a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}" class="ui-btn-active">Difficulty</a></li>
@@ -277,8 +277,8 @@
 
 				<div data-role="header">
 					<a href="#class" data-transition="flip" data-icon="back">Back</a>
-					<h1 class="ui-title">{{classzy.code}} - {{a.name}}</h1>
-					<a href="#delete_assignment" data-icon="alert" data-iconpos="right" class="ui-btn-right">Delete</a>
+					<h1 class="ui-title">{{a.name}}</h1>
+					<a href="#delete_assignment_{{a.name}}_{{a.due_date}}" data-icon="alert" data-iconpos="right" class="ui-btn-right">Delete</a>
 					<div data-role="navbar">
 						<ul>
 							<li><a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}" data-direction="reverse">Difficulty</a></li>
@@ -332,8 +332,8 @@
 
 				<div data-role="header">
 					<a href="#class" data-transition="flip" data-icon="back">Back</a>
-					<h1 class="ui-title">{{classzy.code}} - {{a.name}}</h1>
-					<a href="#delete_assignment" data-icon="alert" data-iconpos="right" class="ui-btn-right">Delete</a>
+					<h1 class="ui-title">{{a.name}}</h1>
+					<a href="#delete_assignment_{{a.name}}_{{a.due_date}}" data-icon="alert" data-iconpos="right" class="ui-btn-right">Delete</a>
 					<div data-role="navbar">
 						<ul>
 							<li><a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}" data-direction="reverse">Difficulty</a></li>
@@ -369,7 +369,7 @@
 				</div>
 			</div>
 			
-			<div data-role="page" id="delete_assignment">
+			<div data-role="page" id="delete_assignment_{{a.name}}_{{a.due_date}}">
 
         		<div data-role="header">
         			<a data-rel="back" data-icon="back">Back</a>

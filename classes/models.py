@@ -7,6 +7,8 @@ class Class(models.Model):
 	professor = models.CharField(max_length=100, blank=True, null=True)
 	views = models.IntegerField(default=0)
 	assignments = models.ManyToManyField("Assignment", blank=True, null=True, related_name='Class_Assignments')
+	delete = models.BooleanField()
+	delete_queue = models.OneToOneField("Delete_Queue", blank=True, null=True, related_name='Class_Delete')
 	
 	def __unicode__(self):
 		return u'%s - %s' % (self.code, self.name)
@@ -26,6 +28,8 @@ class Assignment(models.Model):
 	times = models.ManyToManyField("Time", blank=True, null=True, related_name='Assignments_Times')
 	num_times = models.IntegerField(default=0)
 	chart_url = models.CharField(max_length=500, blank=True, null=True)
+	delete = models.BooleanField()
+	delete_queue = models.OneToOneField("Delete_Queue", blank=True, null=True, related_name='Assignment_Delete')
 	
 	def __unicode__(self):
 		return u'%s - %s' % (self.classzy.code, self.name)
@@ -52,3 +56,9 @@ class Time(models.Model):
 	
 	def __unicode__(self):
 		return u'%s : %s - %d hours' % (self.assignment.classzy.code, self.assignment.name, self.time)
+		
+class Delete_Queue(models.Model):
+	title = models.CharField(max_length=100, blank=True, null=True)
+
+	def __unicode__(self):
+		return u'%s' % (self.title)

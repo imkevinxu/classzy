@@ -2,8 +2,8 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanen
 from django.shortcuts import render_to_response, get_object_or_404
 from django.core.context_processors import csrf
 from django.template import RequestContext
-from classes.models import Class, Assignment, Rating, Comment, Time
 from time import strptime, strftime
+from classes.models import *
 from GChartWrapper import *
 
 def home(request):
@@ -44,6 +44,17 @@ def home(request):
 			assignments = classzy.assignments.all()
 			assignments = sorted(assignments, key=lambda assignment: assignment.due_date, reverse=True)
 			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : assignments, 'total_ratings' : [1, 2, 3, 4, 5], 'updated': True}, context_instance=RequestContext(request))
+			
+		elif 'delete_class_code' in request.POST:
+			classzy = Class.objects.get(code=request.POST['delete_class_code'])
+			assignments = classzy.assignments.all()
+			assignments = sorted(assignments, key=lambda assignment: assignment.due_date, reverse=True)
+			delete = Delete_Queue(title="Someone asked to delete " + classzy.code)
+			delete.save()
+			classzy.delete = True
+			classzy.delete_queue = delete
+			classzy.save()
+			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : assignments, 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Deletion notice has been sent to admins."}, context_instance=RequestContext(request))
 			
 		elif 'add_assignment_classzy' in request.POST:
 			classzy = Class.objects.get(key=request.POST['add_assignment_classzy'])
@@ -150,5 +161,15 @@ def home(request):
 			else:
 				return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date, reverse=True), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Cannot leave empty comment"}, context_instance=RequestContext(request))
 			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date, reverse=True), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New comment added"}, context_instance=RequestContext(request))
+			
+		elif 'delete_assignment_name' in request.POST:
+			classzy = Class.objects.get(key=request.POST['hidden_classzy'])
+			assignment = Assignment.objects.get(name=request.POST['delete_assignment_name'])	
+			delete = Delete_Queue(title="Someone asked to delete " + classzy.code + " : " + assignment.name)
+			delete.save()
+			assignment.delete = True
+			assignment.delete_queue = delete
+			assignment.save()
+			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date, reverse=True), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Deletion notice has been sent to admins."}, context_instance=RequestContext(request))
 			
 	return render_to_response('index.html', context_instance=RequestContext(request))

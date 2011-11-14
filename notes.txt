@@ -3,13 +3,11 @@ TESTS SHOULD HAVE DIFFERENT PARAMS
 	- ask diff questions and show diff things
 	
 Average time, standard dev, range, mean, median
-void difficiculty for future assignments
-class URLs
-
-delete assign + class
 difficulty rating distribution
 time distribution
-classzy loading on touch of tag
+
+void difficiculty for future assignments
+class URLs
 
 look into updating visuals
 make it more web-friendly?

@@ -21,11 +21,12 @@
 						</div>
 					</form>
 			
-					{% if not warning %}
+					{% if warning %}
+    					<p>Missing Class? <a href="#add_class">Add it</a></p>
+    				{% endif %}
 						<p>Examples: <a href="#" onClick="document.getElementById('search_box').value = 'CS 107'; document.getElementById('search_form').submit();$.mobile.pageLoading();" onTouchStart="document.getElementById('search_box').value = 'CS 107'; document.getElementById('search_form').submit();$.mobile.pageLoading();">CS 107</a>, <a href="#" onClick="document.getElementById('search_box').value = 'CS 147'; document.getElementById('search_form').submit();$.mobile.pageLoading();" onTouchStart="document.getElementById('search_box').value = 'CS 147'; document.getElementById('search_form').submit();$.mobile.pageLoading();">CS 147</a>, <a href="#" onClick="document.getElementById('search_box').value = 'Math 51'; document.getElementById('search_form').submit();$.mobile.pageLoading();" onTouchStart="document.getElementById('search_box').value = 'Math 51'; document.getElementById('search_form').submit();$.mobile.pageLoading();">Math 51</a></p>
-					{% else %}
-						<p>Missing Class? <a href="#add_class">Add it</a></p>
-					{% endif %}
+						
+					
 				
 					<p class="fancy tagline">The info you <em>want</em> to know about your classes</p>
 	
@@ -62,7 +63,7 @@
 	<div data-role="page" id="class">
 		
 		<div data-role="header">
-			<a href="#search" data-direction="reverse">Search</a>
+			<a href="#search" data-icon="search" data-direction="reverse">Search</a>
 			<h1 class="ui-title">{{classzy.code}}</h1>
 			<a href="#edit" data-icon="gear" class="ui-btn-right">Info</a>
 		</div>
@@ -137,8 +138,9 @@
 	<div data-role="page" id="edit">
 
 		<div data-role="header">
-			<a data-rel="back">Back</a>
+			<a data-rel="back" data-icon="back">Back</a>
 			<h1 class="ui-title">{{classzy.code}}</h1>
+			<a href="#delete_class" data-icon="alert" data-iconpos="right" class="ui-btn-right">Delete</a>
 		</div>
 
 		<div data-role="content">
@@ -160,10 +162,34 @@
 		</div>
 	</div>
 	
+	<div data-role="page" id="delete_class">
+
+		<div data-role="header">
+			<a data-rel="back" data-icon="back">Back</a>
+			<h1 class="ui-title">Delete {{classzy.code}}?</h1>
+		</div>
+
+		<div data-role="content">
+
+			<form action="/" method="post" data-ajax="false" >{% csrf_token %}
+				<div data-role="fieldcontain">
+					<h3>Are you sure about deleting {{classzy.code}}?</h3>
+                    <p>A notification will be sent to the admins for approval.</p>
+					<input type="hidden" name="delete_class_code" value="{{classzy.code}}"/>
+					<button type="submit" data-theme="e" class="ui-btn-hidden" aria-disabled="false">Yes, DELETE</button>
+					<br/>
+					<a data-role="button" data-direction="reverse" data-theme="c" href="#class" >No, my bad</a>
+				</div>
+			</form>
+			
+
+		</div>
+	</div>
+	
 	<div data-role="page" id="add_assignment">
 
 		<div data-role="header">
-			<a data-rel="back">Back</a>
+			<a data-rel="back" data-icon="back">Back</a>
 			<h1 class="ui-title">{{classzy.code}}</h1>
 		</div>
 
@@ -206,8 +232,9 @@
 			<div data-role="page" id="more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}">
 
 				<div data-role="header">
-					<a href="#class" data-direction="flip">Back</a>
+					<a href="#class" data-transition="flip" data-icon="back">Back</a>
 					<h1 class="ui-title">{{classzy.code}} - {{a.name}}</h1>
+					<a href="#delete_assignment" data-icon="alert" data-iconpos="right" class="ui-btn-right">Delete</a>
 					<div data-role="navbar">
 						<ul>
 							<li><a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}" class="ui-btn-active">Difficulty</a></li>
@@ -247,8 +274,9 @@
 			<div data-role="page" id="more_assignment_info_time_{{a.name}}_{{a.due_date}}">
 
 				<div data-role="header">
-					<a href="#class" data-direction="flip">Back</a>
+					<a href="#class" data-transition="flip" data-icon="back">Back</a>
 					<h1 class="ui-title">{{classzy.code}} - {{a.name}}</h1>
+					<a href="#delete_assignment" data-icon="alert" data-iconpos="right" class="ui-btn-right">Delete</a>
 					<div data-role="navbar">
 						<ul>
 							<li><a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}" data-direction="reverse">Difficulty</a></li>
@@ -283,8 +311,9 @@
 			<div data-role="page" id="more_assignment_info_comments_{{a.name}}_{{a.due_date}}">
 
 				<div data-role="header">
-					<a href="#class" data-direction="flip">Back</a>
+					<a href="#class" data-transition="flip" data-icon="back">Back</a>
 					<h1 class="ui-title">{{classzy.code}} - {{a.name}}</h1>
+					<a href="#delete_assignment" data-icon="alert" data-iconpos="right" class="ui-btn-right">Delete</a>
 					<div data-role="navbar">
 						<ul>
 							<li><a href="#more_assignment_info_difficulty_{{a.name}}_{{a.due_date}}" data-direction="reverse">Difficulty</a></li>
@@ -319,6 +348,31 @@
 					</form>
 				</div>
 			</div>
+			
+			<div data-role="page" id="delete_assignment">
+
+        		<div data-role="header">
+        			<a data-rel="back" data-icon="back">Back</a>
+        			<h1 class="ui-title">Delete {{a.name}}?</h1>
+        		</div>
+
+        		<div data-role="content">
+
+        			<form action="/" method="post" data-ajax="false" >{% csrf_token %}
+        				<div data-role="fieldcontain">
+        					<h3>Are you sure about deleting {{a.name}}?</h3>
+                            <p>A notification will be sent to the admins for approval.</p>
+                            <input type="hidden" name="hidden_classzy" value="{{classzy.key}}"/>
+        					<input type="hidden" name="delete_assignment_name" value="{{a.name}}"/>
+        					<button type="submit" data-theme="e" class="ui-btn-hidden" aria-disabled="false">Yes, DELETE</button>
+        					<br/>
+        					<a data-role="button" data-transition="flip" data-theme="c" href="#class" >No, my bad</a>
+        				</div>
+        			</form>
+
+
+        		</div>
+        	</div>
 	
 		{% endfor %}
 	{% endif %}

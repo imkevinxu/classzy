@@ -60,10 +60,12 @@
 		</div>	
 	{% endif %}
 	
+	{% if not details %}
+	
 	<div data-role="page" id="class">
 		
 		<div data-role="header">
-			<a href="#search" data-icon="search" data-direction="reverse">Search</a>
+			<a href="#search" data-icon="search" data-direction="reverse">Home</a>
 			<h1 class="ui-title">{{classzy.code}}</h1>
 			<a href="#edit" data-icon="gear" class="ui-btn-right">Info</a>
 		</div>
@@ -126,11 +128,6 @@
 			
 			<a href="#add_assignment" data-role="button" data-icon="star" data-theme="b" id="add_button">Add Assignment</a>
 
-		</div>
-		
-		
-		<div data-role="footer"> 
-			<h4>Total Views: {{classzy.views}}</h4>
 		</div>
 	</div>
 	
@@ -202,7 +199,7 @@
 					<input type="text" name="add_assignment_name" value="" id="add_assignment_name" placeholder="Assignment" /><br/>
 					
 					<label for="add_assignment_due_date">Due Date</label>
-					<input type="date" name="add_assignment_due_date" value="" id="add_assignment_due_date"/>
+					<input type="date" name="add_assignment_due_date" value="" id="add_assignment_due_date" placeholder="YYYY-MM-DD"/>
 					
 					<fieldset data-role="controlgroup" data-type="horizontal" style="margin-bottom:0">
 						<legend>Type</legend>

@@ -79,6 +79,31 @@ def home(request):
 					assignment.ratings = prev_ratings
 					assignment.avg_rating = rating.rating
 					assignment.num_ratings = 1
+					
+					chart_data = [0, 0, 0, 0, 0]
+					for time in prev_ratings:
+						if time.rating == 1:
+							chart_data[0] += 1
+						elif time.rating == 2:
+							chart_data[1] += 1
+						elif time.rating == 3:
+							chart_data[2] += 1
+						elif time.rating == 4:
+							chart_data[3] += 1
+						else:
+							chart_data[4] += 1
+					G = VerticalBarStack(chart_data)
+					G.color('3D71A3')
+					G.label('1','2','3','4', '5')
+					G.size(250,125)
+					G.bar(37,15)
+					G.marker('N*','black',0,-1,11)
+					if (max(chart_data) > 10):
+						max_range = max(chart_data) + 4
+					else:
+						max_range = max(chart_data) + 1
+					chart_url = str(G) + '&chds=0,'+str(max_range)+'&chf=bg,s,65432100'
+					assignment.ratings_chart_url = chart_url
 					assignment.save()
 				except:
 					return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(assignments, key=lambda assignment: assignment.due_date, reverse=True), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "Incorrect info submitted"}, context_instance=RequestContext(request))
@@ -131,7 +156,7 @@ def home(request):
 			chart_url = str(G) + '&chds=0,'+str(max_range)+'&chf=bg,s,65432100'
 			assignment.ratings_chart_url = chart_url
 			assignment.save()
-			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date, reverse=True), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New rating added"}, context_instance=RequestContext(request))
+			return render_to_response('index.html', {'classzy' : classzy, 'assignments' : sorted(classzy.assignments.all(), key=lambda assignment: assignment.due_date, reverse=True), 'total_ratings' : [1, 2, 3, 4, 5], 'warning': "New rating added", 'details' : True}, context_instance=RequestContext(request))
 			
 		elif 'add_assignment_time_name' in request.POST:
 			classzy = Class.objects.get(key=request.POST['hidden_classzy'])

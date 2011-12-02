@@ -8,3 +8,15 @@ Future assignments don't need difficulty rating
 Creating custom URLs
 Updating Visual Design
 Web-friendly (inside iPhone model)
+
+Accept all input dates
+
+READ MORE FROM USER TESTING NOTES! https://docs.google.com/document/d/1lGkJnc1S0Z9M1kjFT60ICpd5Dj7RUhBlyU6N_EFeUkc/edit?hl=en_US
+
+Incorporate John/Janice's picture prototypes
+
+Read Rob's other comments
+From Rob:
+Reduce screens/ interactions
+
+Post on Think Outside

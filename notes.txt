@@ -15,8 +15,16 @@ READ MORE FROM USER TESTING NOTES! https://docs.google.com/document/d/1lGkJnc1S0
 
 Incorporate John/Janice's picture prototypes
 
-Read Rob's other comments
+
+Post on Think Outside
+
+404 PAGES
+Get rid of stars
+
+
 From Rob:
 Reduce screens/ interactions
 
-Post on Think Outside
+You guys had a home-run user testing plan -- nice work. Now that you know more about the people who will use your application, you can fix the small bugs that stopped them from falling in love with Classzy. But that's not all you need to do to court the user. You can't just fix what's wrong. Encountering your users is tremendously valuable, but don't let yourself get bogged down with the bugs they report. You can't just fix each leak in your dam -- you need a lasting solution. You need to scare up the sort of insight that's going to make your demo in two weeks look incredible. You're not making just another damn class-tracking application, and you know it. You're making students' lives better because they can work together to slay the work they never knew they had. You need to articulate this POV -- this great big WHY -- as an insight. Your interface has to be more than friendly; it has to suggest that you've talked to fifty students who tried to start a problem set at the last minute, and just needed a hint about how hard the slog might be. And when your app can suggest that -- by simplicity, charm, and intuitive utility -- you'll get your users to fall in love. When it comes down to it, it's not the user's job to know what they want. You need to show them. Final presentations await you. Good luck! p.s. -- re: your question about one screen, I'll need to see it in person.
+
+You guys are rounding the last turn in this race -- you just need to make sure your demo & poster go off well. Before you leave your application alone for good this week, check your user test results. Remove bottlenecks where you can. Test the interface yourselves by filling out more info for more classes. And, in the general case, provision yourselves with a bigger database -- people are going to try to stump your server with weird class codes. Try to get coverage of the more popular classes. (Your product also looks more reputable when it has an accurate list of assignments for most possible classes). I've listed the interaction bugs I found: -- Clicking search when the search box is empty doesn't need to trigger an error -- you can assume the user slipped, and just establish focus on the input. -- You should change "the info you *want* to you know about your classes" to a cleaner, more accurate description. What are you actually solving for the user? -- Why is difficulty shown with stars? Stars connote quality, not difficulty. -- Going from the search page to the result page should be a slide-transition. You have the reverse for when you return "Home," but you need to make transitions symmetrical -- the "Home" button should be changed to "Search" -- the UI should describe user behaviors, not system locations. -- You seem to want to flip from overview to details view, which is a little dubious to me, given that you use slide transitions otherwise. Regardless, if you do -- you need to flip "back" in the right way. You can't preserve the same flip animation; you should flip in the opposite direction -- Why does "add assignment" have a star icon? Why does "detailed info" have a plus icon? Is the user really trying to "star" an assignment? Is the user really "adding" something to detailed info? Consider switching these two icons, or trading both for more appropriate iconography.

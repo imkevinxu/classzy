@@ -1,3 +1,7 @@
+.ui-page {
+	background-image: url(/static/img/bgnoise.gif);
+}
+
 a {
 	text-decoration:none;
 }

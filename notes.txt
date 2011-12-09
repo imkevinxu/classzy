@@ -1,25 +1,24 @@
-CREATE LOTS OF FAKE DATA
+After adding time, app should go back to assignment screen instead of going back to the add screens (not very intuitive)
 
-After adding time, goes back to assignment screen instead of going back to the add screens (not very intuitive) - bigger adding message
+Bigger notification message / popup
 
-Adding tests should have different model
+Adding tests should have different data model
+
 Future assignments don't need difficulty rating
 
-Creating custom URLs
-Updating Visual Design
+Custom URLs for classes and assignments
+
 Web-friendly (inside iPhone model)
 
-Accept all input dates
+Accept all forms in input dates
 
-READ MORE FROM USER TESTING NOTES! https://docs.google.com/document/d/1lGkJnc1S0Z9M1kjFT60ICpd5Dj7RUhBlyU6N_EFeUkc/edit?hl=en_US
-
-Incorporate John/Janice's picture prototypes
-
-
-Post on Think Outside
+Get rid of stars
 
 404 PAGES
-Get rid of stars
+
+“Add Info / Detailed Info” 
+
+To make the class info page more readable, put the label “Assignments” on top of the list of assignments.  We could also change the top label on the page from “CS 107 - C Programming” to “Course Name: C Programming”.
 
 
 From Rob:

@@ -8,6 +8,7 @@ a {
 
 .fancy {
 	font-family: 'Petrona', serif;
+	text-shadow: white 0px 1px 0px;
 }
 
 .warning {
